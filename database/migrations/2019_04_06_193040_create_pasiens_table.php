@@ -18,7 +18,7 @@ class CreatePasiensTable extends Migration
             $table->increments('id');
             $table->string('nama');
             $table->integer('usia');
-            $table->integer('agama');
+            $table->string('agama');
             $table->string('nik');
             $table->string('no_telepon');
             $table->string('alamat');
