@@ -20,7 +20,7 @@ class CreateRumahsakitsTable extends Migration
             $table->string('nama');
             $table->string('no_telepon');
             $table->string('alamat');
-            $table->unsignedInteger('kecamatan_id');
+            $table->unsignedInteger('kecamatan_id')->nullable();
             $table->timestamps();
         });
 

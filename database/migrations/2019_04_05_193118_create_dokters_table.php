@@ -18,12 +18,12 @@ class CreateDoktersTable extends Migration
             $table->increments('id');
             $table->string('nama');
             $table->integer('usia');
-            $table->integer('agama');
+            $table->string('agama');
             $table->string('nik');
             $table->string('no_telepon');
             $table->string('alamat');
-            $table->unsignedInteger('kecamatan_id');
-            $table->unsignedInteger('rumah_sakit_id');
+            $table->unsignedInteger('kecamatan_id')->nullable();
+            $table->unsignedInteger('rumahsakit_id')->nullable();
             $table->timestamps();
         });
 

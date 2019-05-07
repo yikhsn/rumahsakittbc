@@ -6,14 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pasien extends Model
 {
+    protected $fillable = [
+        'nama',
+        'usia',
+        'agama',
+        'nik',
+        'no_telepon',
+        'alamat',
+        'kecamatan_id',
+        'type_id',
+        'jenis_penyakit_id',
+        'pendamping_id',
+        'dokter_id',
+        'rumahsakit_id'
+    ];
+
     public function kecamatan()
     {
         return $this->belongsTo('App\Models\Kecamatan');
     }
 
-    public function rumah_sakit()
+    public function rumahsakit()
     {
-        return $this->belongsTo('App\Models\RumahSakit');
+        return $this->belongsTo('App\Models\Rumahsakit');
     }
 
     public function dokter()
@@ -31,8 +46,8 @@ class Pasien extends Model
         return $this->belongsTo('App\Models\JenisPenyakit');
     }
 
-    public function type_pasien()
+    public function type()
     {
-        return $this->belongsTo('App\Models\JenisPenyakit');
+        return $this->belongsTo('App\Models\Type');
     }
 }

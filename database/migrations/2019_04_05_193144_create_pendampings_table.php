@@ -21,7 +21,7 @@ class CreatePendampingsTable extends Migration
             $table->string('nik');
             $table->string('no_telepon');
             $table->string('alamat');
-            $table->unsignedInteger('kecamatan_id');
+            $table->unsignedInteger('kecamatan_id')->nullable();
             $table->timestamps();
         });
 

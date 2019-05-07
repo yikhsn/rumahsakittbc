@@ -22,12 +22,12 @@ class CreatePasiensTable extends Migration
             $table->string('nik');
             $table->string('no_telepon');
             $table->string('alamat');
-            $table->unsignedInteger('kecamatan_id');
-            $table->unsignedInteger('type_id');
-            $table->unsignedInteger('jenis_penyakit_id');
-            $table->unsignedInteger('pendamping_id');
-            $table->unsignedInteger('dokter_id');
-            $table->unsignedInteger('rumah_sakit_id');
+            $table->unsignedInteger('kecamatan_id')->nullable();
+            $table->unsignedInteger('type_id')->nullable();
+            $table->unsignedInteger('jenis_penyakit_id')->nullable();
+            $table->unsignedInteger('pendamping_id')->nullable();
+            $table->unsignedInteger('dokter_id')->nullable();
+            $table->unsignedInteger('rumahsakit_id')->nullable();
             $table->timestamps();
         });
 

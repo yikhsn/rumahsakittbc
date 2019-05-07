@@ -4,8 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RumahSakit extends Model
+class Rumahsakit extends Model
 {
+    protected $fillable = [
+        'no_rumahsakit',
+        'nama',
+        'no_telepon',
+        'alamat',
+        'kecamatan_id',
+    ];
+
     public function kecamatan()
     {
         return $this->belongsTo('App\Models\Kecamatan');
