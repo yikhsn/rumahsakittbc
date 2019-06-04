@@ -1,99 +1,96 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.master')
 
-        <title>Laravel</title>
+@section('title')
+    <title>TBC APPS</title>
+@endsection
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+@section('content')
+    <div class="wrapper">
+        <div class="container-fluid">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="header-title m-t-0 m-b-20" style=" font-family: segoe ui light; font-size: 35px;">Selamat Datang</h4>
                 </div>
             </div>
+
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card-box">
+                        <a href="/pasien" class="btn btn-sm btn-danger pull-right">Selengkapnya</a>
+                        <h5 style="font-family: segoe ui light; " >Pasien Baru</h5>
+                        <h3 style="  font-family: segoe ui light; font-size: 35px;" class="m-b-20 mt-3" ><span>{{ $jumlah_pasien_baru }}</span></h3>
+                        <h5 style="font-family: segoe ui light; " >Pasien Pengobatan Ulang</h6>
+                        <h3 style="  font-family: segoe ui light; font-size: 35px;" class="m-b-20 mt-3" ><span>{{ $jumlah_pasien_lama }}</span></h3>
+                        <h5 style="font-family: segoe ui light; ">Jumlah Rumah Sakit</h6>
+                        <h3 style="  font-family: segoe ui light; font-size: 35px;" class="m-b-20 mt-3" ><span>{{ $jumlah_rumah_sakit }}</span></h3>
+                        
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card-box" style="width: 800px;">
+                        <h6 class="m-t-0">Jumlah Pasien</h6>
+                        <div class="text-center">
+                            <ul class="list-inline chart-detail-list">
+                                <li class="list-inline-item">
+                                    <p class="font-weight-bold"><i class="fa fa-circle m-r-10 text-primary"></i>Pasien Baru</p>
+                                </li>
+                                <li class="list-inline-item">
+                                    <p class="font-weight-bold"><i class="fa fa-circle m-r-10 text-info"></i>Pasien Pengobatan Ulang</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="dashboard-line-chart" style="height: 225px;"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->                  
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-box">
+                        <h6 class="m-t-0">Daftar Pasien</h6>
+                        <div class="table-responsive">
+                            <table class="table table-hover mails m-0 table table-actions-bar">
+                                <thead>
+                                    <tr>                                    
+                                        <th>#</th>
+                                        <th>NIK</th>
+                                        <th>Nama</th>
+                                        <th>Tipe</th>
+                                        <th>Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($pasiens as $pasien)
+                                        <tr>
+                                            <td>{{ $pasien->id }}</td>
+                                            <td>{{ $pasien->nik }}</td>
+                                            <td>{{ $pasien->nama }}</td>
+                                            <td>
+                                                @if(!is_null($pasien->type_id))
+                                                    {{ $pasien->type->type }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="/pasien/{{ $pasien->id }}"><i class="fa fa-info"></i> | </a>
+                                                <a href="/pasien/{{ $pasien->id }}/edit"><i class="fa fa-edit"></i> | </a>
+                                                <a href="/pasien/{{ $pasien->id }}/delete"><i class="fa fa-trash"></i> | </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </body>
-</html>
+        <!-- end container -->
+
+    </div>
+    <!-- end wrapper -->
+@endsection

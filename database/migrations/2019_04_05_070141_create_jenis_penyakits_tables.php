@@ -17,6 +17,14 @@ class CreateJenisPenyakitsTables extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('nama');
+            $table->unsignedInteger('type_id');
+        });
+
+        Schema::table('jenis_penyakits', function (Blueprint $table) {
+            $table->foreign('type_id')
+                  ->references('id')
+                  ->on('types')
+                  ->onDelete('cascade');
         });
     }
 

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Dokter;
+use App\Models\Rumahsakit;
+use App\Models\Provinsi;
+use App\Models\Kabupaten;
+use App\Models\Kecamatan;
 
 class DokterController extends Controller
 {
@@ -20,7 +24,7 @@ class DokterController extends Controller
             'pasiens'
         ])->get();
 
-        dd($dokters);
+        // dd($dokters);
 
         return view('dokter.index', compact(['dokters']));
     }
@@ -33,14 +37,27 @@ class DokterController extends Controller
             'pasiens'
         ])->find($id);
 
-        dd($dokter);
+        // dd($dokter);
 
         return view('dokter.show', compact(['dokter']));
     }
 
     public function insert()
     {
-        return view('dokter.insert');
+        $provinsis = Provinsi::all();
+
+        $kabupatens = Kabupaten::all();
+
+        $kecamatans = Kecamatan::all();
+
+        $rumahsakits = Rumahsakit::all();
+
+        return view('dokter.insert', compact([
+            'provinsis',
+            'kabupatens',
+            'kecamatans',
+            'rumahsakits',
+        ]));
     }
 
     public function store()
@@ -67,9 +84,24 @@ class DokterController extends Controller
             'pasiens'
         ])->find($id);
 
+
+        $provinsis = Provinsi::all();
+
+        $kabupatens = Kabupaten::all();
+
+        $kecamatans = Kecamatan::all();
+
+        $rumahsakits = Rumahsakit::all();
+
         // dd($dokter);
 
-        return view('dokter.edit', compact(['dokter']));
+        return view('dokter.edit', compact([
+            'dokter',
+            'provinsis',
+            'kabupatens',
+            'kecamatans',
+            'rumahsakits',
+        ]));
     }
 
     public function update($id)
@@ -92,7 +124,7 @@ class DokterController extends Controller
 
     public function delete($id)
     {
-        dd($id);
+        // dd($id);
 
         Dokter::find($id)->delete();
 

@@ -8,18 +8,29 @@ class Pasien extends Model
 {
     protected $fillable = [
         'nama',
-        'usia',
         'agama',
         'nik',
         'no_telepon',
         'alamat',
+        'tempat_lahir',
+        'jenis_kelamin',
+        'tanggal_lahir',
+        'email',
+        'password',
+        'hasil_sputum',
+        'jumlah_sputum',
+        'pengobatan_satu_bulan',
+        'catatan_kesehatan',
         'kecamatan_id',
         'type_id',
         'jenis_penyakit_id',
-        'pendamping_id',
+        'evaluasi_id',
+        'pendamping_nik',
         'dokter_id',
-        'rumahsakit_id'
+        'rumahsakit_id',
     ];
+
+    protected $dates = ['tanggal_lahir'];
 
     public function kecamatan()
     {
@@ -49,5 +60,10 @@ class Pasien extends Model
     public function type()
     {
         return $this->belongsTo('App\Models\Type');
+    }
+
+    public function evaluasi()
+    {
+        return $this->belongsTo('App\Models\Evaluasi');
     }
 }

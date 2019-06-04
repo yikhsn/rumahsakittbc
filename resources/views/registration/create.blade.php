@@ -1,25 +1,78 @@
-<h1>Register</h1>
+@extends('layouts.master')
 
-<form method="post" action="/register">
-    
-    {{ csrf_field() }}
+@section('title')
+    <title>TBC APPS</title>
+@endsection
 
-    <div>
-        <label for="password">Nama Lengkap</label>
-        <input type="text" name="name" id="name">
-    </div>
-    <div>
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-    </div>
-    <div>
-        <label for="password_confirmation">Confirmed Password</label>
-        <input type="password" name="password_confirmation" id="password_confirmation">
-    </div>
+@section('content')
+<div class="wrapper">
+            <div class="container-fluid">
+                <h2 style="font-family: segoe ui light;">Daftar User Baru</h2>
+                <br>
+                <div class="row">
+                    <div class ="col-sm-8">
+                        <div class="panel panel-color panel-primary" style="border-color: #a2a2a2;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Informasi User</h3>
+                            </div>
+                            <div class="panel-body">
+                                
+                                <form class="form-horizontal" role="form" method="post" action="/register">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <label for="name">Nama Lengkap</label>
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" 
+                                                placeholder="Masukan Nama" 
+                                                name="name" id="name" required>
+                                        </div>
+                                    </div>
 
-    <button type="submit">Submit</button>
-</form>
+                                    <div class="form-group">
+                                        <label for="email">E-mail</label>
+                                        <div class="col-md-12">
+                                            <input type="email" class="form-control"
+                                                placeholder ="Masukan E-mail" 
+                                                name="email" id="email" required >
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <div class="col-md-12">
+                                            <input type="password" class="form-control"
+                                                placeholder ="Masukan Password" 
+                                                name="password" id="password" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="password_confirmation">Ulang Password</label>
+                                        <div class="col-md-12">
+                                            <input type="password" class="form-control" 
+                                                placeholder ="Ketik Ulang Password" 
+                                                name="password_confirmation" id="password_confirmation" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="text-right">
+                                                <button  type="submit" class="btn btn-warning btn-rounded">Selanjutnya <i class=" mdi mdi-content-save"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Footer -->
+</div>
+<!-- end wrapper -->
+@endsection

@@ -15,13 +15,15 @@ class CreatePendampingsTable extends Migration
     {
         Schema::create('pendampings', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->string('nik')->primary;
             $table->string('nama');
             $table->integer('usia');
-            $table->string('nik');
             $table->string('no_telepon');
-            $table->string('alamat');
+            $table->string('hubungan_pasien');
+            $table->string('jenis_kelamin');
+            $table->string('agama');
             $table->unsignedInteger('kecamatan_id')->nullable();
+            $table->string('alamat');
             $table->timestamps();
         });
 

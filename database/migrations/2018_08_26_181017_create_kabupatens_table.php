@@ -16,7 +16,7 @@ class CreateKabupatensTable extends Migration
         Schema::create('kabupatens', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('nama');
+            $table->string('name');
             $table->unsignedInteger('provinsi_id');
         });
         

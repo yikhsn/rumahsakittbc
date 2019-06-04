@@ -32,7 +32,7 @@ class CreateDoktersTable extends Migration
                   ->references('id')
                   ->on('kecamatans')
                   ->onDelete('cascade');
-            $table->foreign('rumah_sakit_id')
+            $table->foreign('rumahsakit_id')
                   ->references('id')
                   ->on('rumahsakits')
                   ->onDelete('cascade');

@@ -17,17 +17,29 @@ class CreatePasiensTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('nama');
-            $table->integer('usia');
             $table->string('agama');
             $table->string('nik');
             $table->string('no_telepon');
             $table->string('alamat');
+            $table->string('tempat_lahir');
+            $table->string('jenis_kelamin');
+            $table->string('hubungan_pasien');
+            $table->string('jenis_kelamin');
+            $table->dateTime('tanggal_lahir');
+            $table->string('email');
+            $table->string('password');
+            $table->string('hasil_sputum')->nullable();
+            $table->integer('jumlah_sputum')->nullable();
+            $table->string('pengobatan_satu_bulan')->nullable();
+            $table->string('catatan_kesehatan')->nullable();
             $table->unsignedInteger('kecamatan_id')->nullable();
             $table->unsignedInteger('type_id')->nullable();
             $table->unsignedInteger('jenis_penyakit_id')->nullable();
-            $table->unsignedInteger('pendamping_id')->nullable();
+            $table->string('pendamping_nik')->nullable();
             $table->unsignedInteger('dokter_id')->nullable();
             $table->unsignedInteger('rumahsakit_id')->nullable();
+            $table->unsignedInteger('evaluasi_id')->nullable();
+            $table->boolean('is_done')->nullable();
             $table->timestamps();
         });
 
@@ -44,17 +56,21 @@ class CreatePasiensTable extends Migration
                   ->references('id')
                   ->on('types')
                   ->onDelete('cascade');
-            $table->foreign('pendamping_id')
-                  ->references('id')
+            $table->foreign('pendamping_nik')
+                  ->references('nik')
                   ->on('pendampings')
                   ->onDelete('cascade');
             $table->foreign('dokter_id')
                   ->references('id')
                   ->on('dokters')
                   ->onDelete('cascade');
-            $table->foreign('rumah_sakit_id')
+            $table->foreign('rumahsakit_id')
                   ->references('id')
                   ->on('rumahsakits')
+                  ->onDelete('cascade');
+            $table->foreign('evaluasi_id')
+                  ->references('id')
+                  ->on('evaluasis')
                   ->onDelete('cascade');
         });
     }

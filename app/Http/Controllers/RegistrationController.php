@@ -7,6 +7,11 @@ use App\Models\User;
 
 class RegistrationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function create()
     {
         return view('registration.create');
@@ -31,7 +36,7 @@ class RegistrationController extends Controller
         $user = User::create($credentials);
 
         // sign them in
-        auth()->login($user);
+        // auth()->login($user);
 
         // redirect to the homepage
         return redirect('/');

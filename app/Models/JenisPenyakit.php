@@ -10,4 +10,9 @@ class JenisPenyakit extends Model
     {
         return $this->hasMany('App\Models\Pasien');
     }
+
+    public function evaluasis()
+    {
+        return $this->hasMany('App\Models\Evaluasi');
+    }
 }

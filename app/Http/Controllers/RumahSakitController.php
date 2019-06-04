@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Rumahsakit;
+use App\Models\Kecamatan;
+use App\Models\Kabupaten;
+use App\Models\Provinsi;
 
 class RumahSakitController extends Controller
 {
@@ -15,14 +18,14 @@ class RumahSakitController extends Controller
     public function index()
     {
         $rumahsakits = Rumahsakit::with([
-            'kecamatan',
+            'kecamatan.kabupaten.provinsi',
             'dokters',
             'pasiens',
         ])->get();
 
-        dd($rumahsakits);
+        // dd($rumahsakits);
 
-        return view('rumah_sakit.index');
+        return view('rumah_sakit.index', compact('rumahsakits'));
     }
 
     public function show($id)
@@ -34,14 +37,28 @@ class RumahSakitController extends Controller
             'pasiens',
         ])->find($id);
 
-        dd($rumahsakit);
+        // dd($rumahsakit);
 
-        return view('rumah_sakit.show', compact(['id']));
+        return view('rumah_sakit.show', compact([
+            'rumahsakit'
+        ]));
     }
 
     public function insert()
     {
-        return view('rumah_sakit.insert');
+        $provinsis = Provinsi::all();
+
+        $kabupatens = Kabupaten::all();
+
+        $kecamatans = Kecamatan::all();
+
+        // dd($provinsis);
+
+        return view('rumah_sakit.insert', compact([
+            'provinsis',
+            'kabupatens',
+            'kecamatans'
+        ]));
     }
 
     public function store()
@@ -59,13 +76,26 @@ class RumahSakitController extends Controller
 
     public function edit($id)
     {
+        $provinsis = Provinsi::all();
+
+        $kabupatens = Kabupaten::all();
+
+        $kecamatans = Kecamatan::all();
+
         $rumahsakit = Rumahsakit::with([
             'kecamatan',
             'dokters',
             'pasiens',
         ])->find($id);
 
-        return view('rumah_sakit.edit', compact(['rumahsakit']));
+        return view('rumah_sakit.edit', compact(
+            [
+                'rumahsakit',
+                'provinsis',
+                'kabupatens',
+                'kecamatans'
+            ]
+        ));
     }
 
     public function update($id)
