@@ -10,7 +10,7 @@
                 <h2 style="font-family: segoe ui light;">Edit Kriteria</h2>
                 <br>
                 <div class="row">
-                    <div class ="col-sm-8">
+                    <div class ="col-sm-11">
                         <div class="panel panel-color panel-primary" style="border-color: #a2a2a2;">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Kriteria Baru</h3>

@@ -171,7 +171,7 @@
                                 <tbody>
                                     @foreach($pasiens as $pasien)
                                     <tr>
-                                        <td>{{ $pasien->id }}</td>
+                                        <td>{{ $pasiens_number += 1 }}</td>
                                         <td>{{ $pasien->nik }}</td>
                                         <td>{{ $pasien->nama }}</td>
                                         <td>
@@ -211,7 +211,7 @@
                             <tbody>
                                 @foreach($rumahsakits as $rumahsakit)
                                 <tr>
-                                    <td>{{ $rumahsakit->id }}</td>
+                                    <td>{{ $rumahsakits_number += 1 }}</td>
                                     <td>{{ $rumahsakit->nama }}</td>
                                     <td>{{ $rumahsakit->pasiens->count() }}</td>
                                 </tr>
@@ -236,7 +236,7 @@
                         <tbody>
                             @foreach($dokters as $dokter)
                             <tr>
-                                <td>{{ $dokter->id }}</td>
+                                <td>{{ $dokters_number += 1 }}</td>
                                 <td>{{ $dokter->nama }}</td>
                                 <td>{{ $dokter->pasiens->count() }}</td>
                             </tr>

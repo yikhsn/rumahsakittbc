@@ -12,7 +12,7 @@
 
                 <div clas="container">
                     <div  class="row">
-                        <div class="col-lg-10">
+                        <div class="col-lg-11">
                             <div class="panel panel-color panel-primary" style="border-color: #a2a2a2;">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Langkah 3 : Pilih Kriteria Evaluasi dan Rencana Pengobatan</h3>

@@ -11,7 +11,7 @@
                 <br>
                 <div class="col-md-11">
                     <div class="text-right">
-                        <a href="/pasien/new/finish_store" class="btn btn-danger"><i class="fa fa-save"></i>  Simpan</a>
+                        <a href="/pasien/old/finish_store" class="btn btn-danger"><i class="fa fa-save"></i>  Simpan</a>
                         <a href="/pasien/old/pendamping" class="btn btn-primary"><i class="fa fa-arrow-left"></i>  Kembali</a>
                     </div>
 

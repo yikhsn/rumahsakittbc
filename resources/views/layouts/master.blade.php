@@ -214,31 +214,36 @@
                             <li class="dropdown notification-list">
                                 <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                                    aria-haspopup="false" aria-expanded="false">
-                                    <img src="{{ URL::asset('assets/images/users/avatar-1.jpg') }}" alt="user" class="rounded-circle"> <span class="ml-1 pro-user-name">Anderson <i class="mdi mdi-chevron-down"></i> </span>
+                                    <img src="{{ URL::asset('assets/images/users/avatar-1.svg') }}" alt="user" class="rounded-circle">
+                                    <span class="ml-1 pro-user-name">
+                                        <i class="mdi mdi-chevron-down">
+                                            {{{ isset(Auth::user()->name) ? ucfirst(Auth::user()->name) : 'User' }}}
+                                        </i>
+                                    </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                     <!-- item-->
-                                    <div class="dropdown-item noti-title">
+                                    <!-- <div class="dropdown-item noti-title">
                                         <h6 class="text-overflow m-0">Nama Pengguna</h6>
-                                    </div>
+                                    </div> -->
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <i class="ti-user"></i> <span>My Account</span>
-                                    </a>
+                                    </a> -->
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <i class="ti-settings"></i> <span>Settings</span>
-                                    </a>
+                                    </a> -->
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <i class="ti-lock"></i> <span>Lock Screen</span>
-                                    </a>
+                                    </a> -->
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <a href="/logout" class="dropdown-item notify-item">
                                         <i class="ti-power-off"></i> <span>Logout</span>
                                     </a>
                                 </div>

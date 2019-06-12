@@ -31,6 +31,9 @@ class AppController extends Controller
 
         $jumlah_rumah_sakit = Rumahsakit::get()->count();
 
+        $pasiens_number = 0;
+        $rumahsakits_number = 0;
+        $dokters_number = 0;
 
         return view('welcome', compact(
             [
@@ -39,7 +42,10 @@ class AppController extends Controller
                 'pasiens',
                 'jumlah_pasien_baru',
                 'jumlah_pasien_lama',
-                'jumlah_rumah_sakit'
+                'jumlah_rumah_sakit',
+                'pasiens_number',
+                'rumahsakits_number',
+                'dokters_number',
             ]
         ));
     }
