@@ -21,11 +21,14 @@ class RumahSakitController extends Controller
             'kecamatan.kabupaten.provinsi',
             'dokters',
             'pasiens',
-        ])->get();
+        ])->paginate(15);
 
-        // dd($rumahsakits);
+        $data = json_decode($rumahsakits->toJSON());
+        $number = ($data->current_page - 1) * 15;
 
-        return view('rumah_sakit.index', compact('rumahsakits'));
+        // dd($data->current_page);
+
+        return view('rumah_sakit.index', compact('rumahsakits', 'number'));
     }
 
     public function show($id)

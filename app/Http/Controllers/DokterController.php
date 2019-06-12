@@ -22,11 +22,14 @@ class DokterController extends Controller
             'kecamatan',
             'rumahsakit',
             'pasiens'
-        ])->get();
+        ])->paginate(15);
 
-        // dd($dokters);
+        $data = json_decode($dokters->toJSON());
+        $number = ($data->current_page - 1) * 15;
 
-        return view('dokter.index', compact(['dokters']));
+        // dd($data->current_page);
+
+        return view('dokter.index', compact(['dokters', 'number']));
     }
 
     public function show($id)

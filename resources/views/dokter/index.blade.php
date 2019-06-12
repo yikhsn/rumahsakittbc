@@ -39,7 +39,7 @@
                             <tbody>
                                 @foreach($dokters as $dokter)
                                 <tr>
-                                    <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $dokter->id }}</td>
+                                    <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $number += 1 }}</td>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $dokter->nama }}</td>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $dokter->rumahsakit->nama }}</td>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">
@@ -55,6 +55,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <!-- PAGINATION LINKS -->
+                        {{ $dokters->links() }}
+
+
                     </div>
                 </div>
             </div>

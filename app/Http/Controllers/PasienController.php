@@ -26,18 +26,21 @@ class PasienController extends Controller
         $request->session()->forget('pasien');
         $request->session()->forget('pendamping');
 
-        $pasiens = Pasien::take(10)->with([
+        $pasiens = Pasien::with([
             'kecamatan.kabupaten.provinsi',
             'rumahsakit',
             'dokter',
             'pendamping',
             'jenis_penyakit',
             'type'
-        ])->get();
+        ])->paginate(15);
 
-        // dd($pasiens);
+        $data = json_decode($pasiens->toJSON());
+        $number = ($data->current_page - 1) * 15;
 
-        return  view('pasien.index', compact(['pasiens']));
+        // dd($number);
+
+        return  view('pasien.index', compact(['pasiens', 'number']));
     }
 
     public function show($id)
@@ -563,8 +566,6 @@ class PasienController extends Controller
                 'evaluasi_id'                           =>    request('evaluasi_id'),
                 'rumahsakit_id'                         =>    request('rumahsakit_id'),
                 'dokter_id'                             =>    request('dokter_id'),
-
-
         ]);
 
         return redirect('/pasien/' . $id);

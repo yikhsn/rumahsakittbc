@@ -43,7 +43,7 @@
                         <tbody>
                             @foreach($pasiens as $pasien)
                                 <tr>
-                                    <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $pasien->id }}</td>
+                                    <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $number += 1 }}</td>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $pasien->nik }}</td>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">
                                             {{ $pasien->nama }}
@@ -84,6 +84,11 @@
                             @endforeach
                         </tbody>
                     </table>
+
+
+                    <!-- PAGINATION LINKS -->
+                    {{ $pasiens->links() }}
+
                 </div>
             </div>
         </div>
@@ -134,113 +139,12 @@
                         </form>
                         
                     </div>
-                    </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-                    
-                </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+            
+    </div>
 
 
-                <!-- Modal Info Pendamping Pasien -->
-                <div class="modal fade bs-example-modal-sm" tabindex="-1" id="data-pendamping" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="mySmallModalLabel">Penamping Pasien</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            </div>
-                            <div class="modal-body">
-                                <center>
-                                <img src="assets/images/meong.png" class="img-circle" alt="Cinque Terre" width="50%" >
-                                <br>
-                                <br>
-                                <h6 style="font-family: segoe ui light;">Ahmad Munir</h6>
-                                </center>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <p>Status</p>
-                                        <hr>
-                                        
-                                        
-                                        
-                                        <p>No HP</p>
-                                        <hr>
-                                        
-                                        
-                                    </div>
-                                    <div class="col-md-8">
-                                        <p>Anak KAndung</p>
-                                        <hr>
-                                        
-                                        
-                                        <p>083456465465</p>
-                                        <hr>
-                                        <br>
-                                        <br>
-                                        
-                                        
-                                    </div>
-                                    
-                                </div>
-                                <center>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Selengkapnya <i class="mdi mdi-account"></i></button>
-                                </center>
-                                
-                                
-                            </div>
-                            </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-
-                                <!-- Modal Info Pasien -->
-                <div class="modal fade bs-example-modal-sm" tabindex="-1" id="data-pasien" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="mySmallModalLabel">Info Pasien</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            </div>
-                            <div class="modal-body">
-                                <center>
-                                <img src="assets/images/meong.png" class="img-circle" alt="Cinque Terre" width="50%" >
-                                <br>
-                                <br>
-                                <h6 style="font-family: segoe ui light;">Mahmud Ali Banna</h6>
-                                </center>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <p>NIK</p>
-                                        <hr>
-                                        
-                                        
-                                        
-                                        <p>TTL</p>
-                                        <hr>
-                                        <p>Usia</p>
-                                        
-                                    </div>
-                                    <div class="col-md-9">
-                                        <p>1256465465</p>
-                                        <hr>
-                                        
-                                        
-                                        <p>54 Tahun</p>
-                                        <hr>
-                                        <p>Laki-Laki</p>
-                                        
-                                    </div>
-                                    
-                                </div>
-                                <center>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Selengkapnya <i class="mdi mdi-account"></i></button>
-                                </center>
-                                
-                                
-                            </div>
-                            </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                            <!-- end wrapper -->
+               
 @endsection
