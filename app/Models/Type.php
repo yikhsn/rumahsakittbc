@@ -10,4 +10,9 @@ class Type extends Model
     {
         return $this->hasMany('App\Models\Pasien');
     }
+
+    public function jenis_penyakits()
+    {
+        return $this->hasMany('App\Models\JenisPenyakit');
+    }
 }

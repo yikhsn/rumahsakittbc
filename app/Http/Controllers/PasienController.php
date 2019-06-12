@@ -12,6 +12,7 @@ use App\Models\Rumahsakit;
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
+use DateTime;
 
 class PasienController extends Controller
 {
@@ -50,9 +51,15 @@ class PasienController extends Controller
             'type'
         ])->find($id);
 
-        // dd($pasien);
+        $awal_pengobatan_sebelumnya =  new DateTime($pasien->awal_pengobatan_sebelumnya);
+        $akhir_pengobatan_sebelumnya =  new DateTime($pasien->akhir_pengobatan_sebelumnya);
 
-        return view('pasien.show', compact(['pasien']));
+        $lama_pengobatan_sebelumnya = $akhir_pengobatan_sebelumnya->diff($awal_pengobatan_sebelumnya)->format('%a');
+
+        return view('pasien.show', compact([
+            'pasien',
+            'lama_pengobatan_sebelumnya'
+        ]));
     }
 
     public function store()
@@ -139,7 +146,7 @@ class PasienController extends Controller
             'hasil_sputum'          => 'required',
             'jumlah_sputum'         => 'required',
             'pengobatan_satu_bulan' => 'required',
-            'catatan_kesehatan'     => 'required',
+            'catatan_kesehatan'     => 'nullable',
         ]);
 
         $pasien = $request->session()->get('pasien');
@@ -333,14 +340,24 @@ class PasienController extends Controller
     public function old_pasien_riwayat_store(Request $request)
     {
         $validatedData = $request->validate([
-            'hasil_sputum'          => 'required',
-            'jumlah_sputum'         => 'required',
-            'pengobatan_satu_bulan' => 'required',
-            'catatan_kesehatan'     => 'required',
+            'hasil_sputum'                      => 'required',
+            'jumlah_sputum'                     => 'required',
+            'catatan_kesehatan'                 => 'nullable',
+            'awal_pengobatan_sebelumnya'        => 'required',
+            'akhir_pengobatan_sebelumnya'       => 'required',
+            'kelangkapan_pengobatan_sebelumnya' => 'required',
+            'tempat_pengobatan_sebelumnya'      => 'required',
+            'nama_dokter_sebelumnya'            => 'required',
+            'alamat_pengobatan_sebelumnya'      => 'required',
+            'hasil_sputum_sebelumnya'           => 'required',
+            'jumlah_sputum_sebelumnya'          => 'required',
+            'status_kesembuhan_sebelumnya'      => 'required',
         ]);
 
         $pasien = $request->session()->get('pasien');
         $pasien->fill($validatedData);
+
+        // dd($pasien);
 
         // comment this for a while
         $request->session()->put('pasien', $pasien);
@@ -480,17 +497,23 @@ class PasienController extends Controller
         ])->find($id);
 
         $provinsis = Provinsi::all();
-
         $kabupatens = Kabupaten::all();
-
         $kecamatans = Kecamatan::all();
+        $evaluasis = Evaluasi::all();
+        $jenis_penyakits = JenisPenyakit::all();
+        $dokters = Dokter::all();
+        $rumahsakits = Rumahsakit::all();
 
         return view('pasien.edit', compact(
             [
                 'pasien',
                 'kecamatans',
                 'kabupatens',
-                'provinsis'
+                'provinsis',
+                'jenis_penyakits',
+                'evaluasis',
+                'dokters',
+                'rumahsakits'
             ]
         ));
     }
@@ -512,21 +535,36 @@ class PasienController extends Controller
 
         Pasien::where('id', $id)
             ->update([
-                'nama'                      =>    request('nama'),
-                'nik'                       =>    request('nik'),
-                'tempat_lahir'              =>    request('tempat_lahir'),
-                'tanggal_lahir'             =>    request('tanggal_lahir'),
-                'jenis_kelamin'             =>    request('jenis_kelamin'),
-                'no_telepon'                =>    request('no_telepon'),
-                'email'                     =>    request('email'),
-                'password'                  =>    request('password'),
-                'agama'                     =>    request('agama'),
-                'alamat'                    =>    request('alamat'),
-                'kecamatan_id'              =>    request('kecamatan_id'),
-                'jumlah_sputum'             =>    request('jumlah_sputum'),
-                'hasil_sputum'              =>    request('hasil_sputum'),
-                'pengobatan_satu_bulan'     =>    request('pengobatan_satu_bulan'),
-                'catatan_kesehatan'         =>    request('catatan_kesehatan'),
+                'nama'                                  =>    request('nama'),
+                // 'nik'                                   =>    request('nik'),
+                'tempat_lahir'                          =>    request('tempat_lahir'),
+                'tanggal_lahir'                         =>    request('tanggal_lahir'),
+                'jenis_kelamin'                         =>    request('jenis_kelamin'),
+                'no_telepon'                            =>    request('no_telepon'),
+                'email'                                 =>    request('email'),
+                'password'                              =>    request('password'),
+                'agama'                                 =>    request('agama'),
+                'alamat'                                =>    request('alamat'),
+                'kecamatan_id'                          =>    request('kecamatan_id'),
+                'jumlah_sputum'                         =>    request('jumlah_sputum'),
+                'hasil_sputum'                          =>    request('hasil_sputum'),
+                'pengobatan_satu_bulan'                 =>    request('pengobatan_satu_bulan'),
+                'catatan_kesehatan'                     =>    request('catatan_kesehatan'),
+                'awal_pengobatan_sebelumnya'            =>    request('awal_pengobatan_sebelumnya'),
+                'akhir_pengobatan_sebelumnya'           =>    request('akhir_pengobatan_sebelumnya'),
+                'kelangkapan_pengobatan_sebelumnya'     =>    request('kelangkapan_pengobatan_sebelumnya'),
+                'tempat_pengobatan_sebelumnya'          =>    request('tempat_pengobatan_sebelumnya'),
+                'nama_dokter_sebelumnya'                =>    request('nama_dokter_sebelumnya'),
+                'alamat_pengobatan_sebelumnya'          =>    request('alamat_pengobatan_sebelumnya'),
+                'jumlah_sputum_sebelumnya'              =>    request('jumlah_sputum_sebelumnya'),
+                'hasil_sputum_sebelumnya'               =>    request('hasil_sputum_sebelumnya'),
+                'status_kesembuhan_sebelumnya'          =>    request('status_kesembuhan_sebelumnya'),
+                'jenis_penyakit_id'                     =>    request('jenis_penyakit_id'),
+                'evaluasi_id'                           =>    request('evaluasi_id'),
+                'rumahsakit_id'                         =>    request('rumahsakit_id'),
+                'dokter_id'                             =>    request('dokter_id'),
+
+
         ]);
 
         return redirect('/pasien/' . $id);

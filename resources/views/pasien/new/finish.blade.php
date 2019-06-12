@@ -10,13 +10,27 @@
                 <h2 style="font-family: segoe ui light;">Daftar Pasien Baru</h2>
                 <br>
                 <div class="col-md-11">
+                    
                     <div class="text-right">
-                        <a href="print/cetak-pasien-baru.php" class="btn btn-warning"><i class="fa fa-print"></i>  Cetak</a>
                         <a href="/pasien/new/finish_store" class="btn btn-danger"><i class="fa fa-save"></i>  Simpan</a>
-                        <a href="print/cetak-pasien-baru.php" class="btn btn-primary"><i class="fa fa-arrow-left"></i>  Kembali</a>
+                        <a href="/pasien/new/pendamping" class="btn btn-primary"><i class="fa fa-arrow-left"></i>  Kembali</a>
                     </div>
+
+
+                    <!-- Header -->
                     <hr style="background-color:#585858 ;">
-                    <h6>Identitas Pasien</h6>
+                    <center>
+                      <h4>Informasi Pasien</h4>
+                      <b>Rumah Sakit : {{ $pasien->rumahsakit->nama }} | Dokter : {{ $pasien->dokter->nama }} | Tanggal Pendaftaran : {{ date('Y-m-d') }} </b>
+                    </center>
+                    <hr style="background-color:#585858 ;">
+                    <br>
+
+
+                    <hr style="background-color:#585858 ;">
+                    <center>
+                      <h6>Identitas Pasien</h6>
+                    </center>
                     <hr style="background-color:#585858 ;">
                     <div class="row">
                         <div class="col-md-2">
@@ -67,9 +81,7 @@
                             <br>
                             
                             <!-- Alamat Lengkap -->
-                            <textarea rows="5" class="form-control" style="border-top:0px; border-left:0px; border-right:0px; border-bottom-color: #808080;"  name="alamat_lengkap">
-                              {{ $pasien->alamat }}, {{ $pasien->kecamatan->name }}, {{ $pasien->kecamatan->kabupaten->name }}, {{ $pasien->kecamatan->kabupaten->provinsi->name }}
-                            </textarea>
+                            <textarea rows="5" class="form-control" style="border-top:0px; border-left:0px; border-right:0px; border-bottom-color: #808080;"  name="alamat_lengkap">{{ $pasien->alamat }}, {{ $pasien->kecamatan->name }}, {{ $pasien->kecamatan->kabupaten->name }}, {{ $pasien->kecamatan->kabupaten->provinsi->name }}</textarea>
                             
                         </div>
                         <div class="col-md-2">
@@ -92,12 +104,12 @@
                           <p>Informasi Lainnya</p>
                         </div>
                         <div class="col-md-4">
-                          <!-- jenis Pasien -->
-                          <input type="text" class="form-control" style="border-top:0px; border-left:0px; border-right:0px; border-bottom-color: #808080; background-color:white;" disabled name="jenis_pasien">
+                           <!-- jenis Pasien -->
+                           <input type="text"  value="{{ $pasien->type->type }}" class="form-control" style="border-top:0px; border-left:0px; border-right:0px; border-bottom-color: #808080; background-color:white;" disabled name="jenis_pasien">
                           <br>
 
                           <!-- Kondisi Pasien -->
-                          <input type="text" class="form-control" style="border-top:0px; border-left:0px; border-right:0px; border-bottom-color: #808080; background-color:white;" disabled name="kondisi_pasien">
+                          <input type="text"  value="{{ $pasien->jenis_penyakit->nama }}" class="form-control" style="border-top:0px; border-left:0px; border-right:0px; border-bottom-color: #808080; background-color:white;" disabled name="kondisi_pasien">
                           <br>
 
                           <!-- Jumlah Spesimen -->
@@ -115,57 +127,33 @@
 
                           <br>
                           <!-- Informasi Lainnya -->
-                          <textarea name="" id=""  rows="10" class="form-control" style="border-top:0px; border-left:0px; border-right:0px;" name="informasi_lainnya">
-                          {{ $pasien->alamat }}, {{ $pasien->kecamatan->name }}, {{ $pasien->kecamatan->kabupaten->name }}, {{ $pasien->kecamatan->kabupaten->provinsi->name }}
-                          </textarea>
+                          <textarea name="" id=""  rows="10" class="form-control" style="border-top:0px; border-left:0px; border-right:0px;" name="informasi_lainnya">{{ $pasien->alamat }}, {{ $pasien->kecamatan->name }}, {{ $pasien->kecamatan->kabupaten->name }}, {{ $pasien->kecamatan->kabupaten->provinsi->name }}</textarea>
                         </div>
                     </div>
                     <br>
+                    <br>
+                    <br>
+
 
                     <!-- Referensi Kriteria -->
                     <hr style="background-color:#585858 ;">
                     <center>
-                    <h6>Rereferensi Kriteria</h6>
+                    <h6>Evaluasi Kriteria Pasien</h6>
                     </center>
                     <hr style="background-color:#585858 ;">
                     <table class="table table-bordered">
                       <thead>
+                        <th>Tipe Pasien</th>
                         <th>Evaluasi</th>
                         <th>Referensi Kriteria Evaluasi</th>
                       </thead>
                       <tbody>
                         <tr>
-                          <td name="evaluasi">Sembuh</td>
+                          <td style="width: 150px;">{{ $pasien->jenis_penyakit->nama }}</td>
+                          <td name="evaluasi"> {{ $pasien->evaluasi->nama }} </td>
                           <td name="referensi_kriteria">
                             <p>
-                              ( 1-2 bulan tidak berobat teratur) Pemeriksaan pada hasil BTA
-                              SPS(Sewaktu, Pagi, Sewaktu) hasil positif (+), lanjutkan
-                              pengobatan sampai seluruh dosis selesai dan 1 bulan sebelum
-                              akhir pengobatan (AP) harus diperiksa dahak kembali.
-                              <hr style="background-color:#585858 ;">
-                              ( >=2 bulan tidak berobat teratur) Pemeriksaan dengan hasil
-                              satu atau lebih hasil BTA positif (+) maka lanjutkan
-                              pengobatan atau rujuk (mungkin kasus kronik)
-                            </p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td >Informasi Lainnya</td>
-                          <td name="informasi_kriteria_lainnya">
-                            <p>Pemeriksaan pasien dilakukan berdasarkan keterangan hasil
-                              pemeriksaan sebelumnya atau pasien melakukan pengobatan
-                              ulang.
-                            </p>
-                            <hr style="background-color:#585858 ;">
-                            <p>
-                              Pemeriksaan pasien pada akhir intensif dengan hasil BTA
-                              negatif (-), pengobatan dilanjutkan sampai selesai
-                            </p>
-                            <hr style="background-color:#585858 ;">
-                            <p>
-                              Pemeriksaan pasien pada pengobatan bulan ke3, ke5 dan
-                              akhir pengobatan tidak dilakukan pemeriksaan ulang (follow
-                              Up), pasien hanya minum obat sampai selesai
+                              {{ $pasien->evaluasi->keterangan }}
                             </p>
                           </td>
                         </tr>
@@ -174,18 +162,11 @@
                     </table>
                   </div>
                   <br>
-                  <br>
-                  <!-- /Referensi Kriteria -->
 
                   <!-- Informasi Pendamping Minum Obat   -->
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
                   <hr style="background-color:#585858 ;">
                   <center>
-                    Informasi Pendamping Minum Obat
+                    <h6>Informasi Pendamping Minum Obat</h6>
                   </center>
                   <hr style="background-color:#585858 ;">
                   <div class="container-fluid">
@@ -246,42 +227,22 @@
                         <br>
                         
                         <!-- Alamat -->
-                        <textarea name="alamat_pasien" id=""  rows="5" class="form-control" style="border-top:0px; border-left:0px; border-right:0px;" >
-                          {{ $pendamping->alamat }}, {{ $pendamping->kecamatan->name }}, {{ $pendamping->kecamatan->kabupaten->name }}, {{ $pendamping->kecamatan->kabupaten->provinsi->name }}
-                        </textarea>
+                        <textarea name="alamat_pasien" id=""  rows="5" class="form-control" style="border-top:0px; border-left:0px; border-right:0px;" >{{ $pendamping->alamat }}, {{ $pendamping->kecamatan->name }}, {{ $pendamping->kecamatan->kabupaten->name }}, {{ $pendamping->kecamatan->kabupaten->provinsi->name }}</textarea>
 
                       </div>
 
                     </div>
                     <br>
                     <br>
-                    <hr style="background-color:#585858 ;">
-                    <center>
-                      <h6>Hasil Foto Toraks (Jika Ada)</h6>
-                    </center>
-      
-      <hr style="background-color:#585858 ;">
-      <br>
-      <br>
-      <br>
-      <br>
-      <hr style="background-color:#585858 ;">
-      <center>
-        <h6>Scan KTP Pasien</h6>
-      </center>
-      
-      <hr style="background-color:#585858 ;">
-<footer>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <div class="text-right">
-    <p><u><b>Petugas</b></u> </p>
-  </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+ 
+                      <div class="text-right">
+                        <p><u><b>Petugas</b></u> </p>
+                      </div>
                     </div>
                 </div>
             </div>

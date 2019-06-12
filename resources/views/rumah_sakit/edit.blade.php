@@ -84,9 +84,7 @@
                                             <div class="col-md-10">
                                                 <textarea type="text" name="alamat" id="alamat" 
                                                     class="form-control"  rows="5" 
-                                                    placeholder="RT/RW/Jalan" required>
-                                                    {{ $rumahsakit->alamat }}
-                                                </textarea>
+                                                    placeholder="RT/RW/Jalan" required>{{ $rumahsakit->alamat }}</textarea>
                                             </div>
                                         </div>
 

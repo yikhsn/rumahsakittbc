@@ -83,15 +83,11 @@
 
                                         <div class="form-group">
                                             <div class="col-md-10">
-                                            <div class="text-right">
-                                            <br>
-                                            <br>
-                                            <!-- <button  type="button" class="btn btn-danger btn-rounded">Hapus <i class="mdi mdi-delete"></i></button>
-                                            <button  type="button" class="btn btn-warning btn-rounded">Selanjutnya <i class="mdi mdi-arrow-right-bold"></i></button>
-                                            <br> -->
-                                            <!-- <a href="pasien-baru-riwayat.php"  class="btn btn-warning btn-rounded"> Reset</a> -->
-                                            <button class="btn btn-danger btn-rounded" type="submit">Tambah</button>
-                                            </div>  
+                                                <div class="text-right">
+                                                <br>
+                                                <br>
+                                                <button class="btn btn-danger btn-rounded" type="submit">Tambah</button>
+                                                </div>  
                                             </div>
                                         </div>
                                     </form>

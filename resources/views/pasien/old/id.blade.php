@@ -17,12 +17,33 @@
                             </div>
                             <div class="panel-body">
                                 
-                                <form class="form-horizontal" role="form" method="post" action="/pasien/new/store">
+                                <form class="form-horizontal" role="form" method="post" action="/pasien/old/store">
                                     
                                     {{ csrf_field() }}
                                     
-                                    <input type="hidden" value="1"
+                                    <input type="hidden" value="2"
                                         name="type_id" id="type_id" required>
+
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" 
+                                                value="{{ (isset( $pasien->email )) ? $pasien->email : '' }}"
+                                                placeholder="E-Mail Aktif"
+                                                name="email" id="email" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Belum di hash -->
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <div class="col-md-10">
+                                            <input type="password" class="form-control"
+                                                value="{{ (isset( $pasien->password )) ? $pasien->password : '' }}"
+                                                placeholder="Password" 
+                                                name="password" id="password" required>
+                                        </div>
+                                    </div>
 
 
                                     <div class="form-group">
@@ -86,27 +107,6 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" 
-                                                value="{{ (isset( $pasien->email )) ? $pasien->email : '' }}"
-                                                placeholder="E-Mail Aktif (Opsional)"
-                                                name="email" id="email" required>
-                                        </div>
-                                    </div>
-
-                                    <!-- Belum di hash -->
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <div class="col-md-10">
-                                            <input type="password" class="form-control"
-                                                value="{{ (isset( $pasien->password )) ? $pasien->password : '' }}"
-                                                placeholder="Password" 
-                                                name="password" id="password" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
                                         <label for="agama">Agama</label>
                                         <div class="col-md-10">
                                             <select class="form-control"  name="agama" id="agama" required>
@@ -159,9 +159,7 @@
                                     <div class="form-group">
                                         <label>Alamat Kediaman</label>
                                         <div class="col-md-10">
-                                            <textarea class="form-control"  rows="5" placeholder="RT/RW/Jalan" name="alamat" id="alamat" required>
-                                                {{ (isset( $pasien->alamat )) ? $pasien->alamat : '' }}
-                                            </textarea>
+                                            <textarea class="form-control"  rows="5" placeholder="RT/RW/Jalan" name="alamat" id="alamat" required>{{ (isset( $pasien->alamat )) ? $pasien->alamat : '' }}</textarea>
                                         </div>
                                     </div>
 
@@ -170,11 +168,7 @@
                                             <div class="text-right">
                                                 <br>
                                                 <br>
-                                                <!-- <button  type="button" class="btn btn-danger btn-rounded">Hapus <i class="mdi mdi-delete"></i></button>
-                                                <button  type="button" class="btn btn-warning btn-rounded">Selanjutnya <i class="mdi mdi-arrow-right-bold"></i></button>
-                                                <br> -->
-                                                <a href="pasien-pengobatan-ulang.php"  class="btn btn-danger btn-rounded"> Daftar Sebagai Pasien Pengobatan Ulang</a>
-                                                <button class="btn btn-warning btn-rounded" type="submit">Daftar Sebagai Pasien Baru</button>
+                                                <button class="btn btn-warning btn-rounded" type="submit">Selanjutnya</button>
                                             </div>
                                         </div>
                                     </div>

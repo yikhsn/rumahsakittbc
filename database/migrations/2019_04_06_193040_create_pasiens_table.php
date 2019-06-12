@@ -25,7 +25,7 @@ class CreatePasiensTable extends Migration
             $table->string('jenis_kelamin');
             $table->string('hubungan_pasien');
             $table->string('jenis_kelamin');
-            $table->dateTime('tanggal_lahir');
+            $table->date('tanggal_lahir');
             $table->string('email');
             $table->string('password');
             $table->string('hasil_sputum')->nullable();
@@ -40,6 +40,16 @@ class CreatePasiensTable extends Migration
             $table->unsignedInteger('rumahsakit_id')->nullable();
             $table->unsignedInteger('evaluasi_id')->nullable();
             $table->boolean('is_done')->nullable();
+            // new add for pasien pengobatan ulang
+            $table->date('awal_pengobatan_sebelumnya')->nullable();
+            $table->date('akhir_pengobatan_sebelumnya')->nullable();
+            $table->string('kelangkapan_pengobatan_sebelumnya')->nullable();
+            $table->string('tempat_pengobatan_sebelumnya')->nullable();
+            $table->string('nama_dokter_sebelumnya')->nullable();
+            $table->string('alamat_pengobatan_sebelumnya')->nullable();
+            $table->string('hasil_sputum_sebelumnya')->nullable();
+            $table->string('jumlah_sputum_sebelumnya')->nullable();
+            $table->string('status_kesembuhan_sebelumnya')->nullable();
             $table->timestamps();
         });
 

@@ -71,8 +71,14 @@ Route::post('/dokter/{id}/update', 'DokterController@update');
 // ==============================================================================
 // ======================== ALL ROUTE FOR REFERENSI PAGE ========================
 // ==============================================================================
+Route::get('/referensi', 'AppController@referensi');
 Route::get('/referensi/kriteria', 'AppController@referensi_kriteria');
-Route::post('/referensi', 'AppController@referensi');
+Route::get('/referensi/kriteria/add', 'AppController@add_kriteria');
+Route::post('/referensi/kriteria/store', 'AppController@store_kriteria');
+Route::get('/referensi/kriteria/{id}/edit', 'AppController@edit_kriteria');
+Route::post('/referensi/kriteria/{id}/update', 'AppController@update_kriteria');
+Route::get('/referensi/kriteria/{id}/delete', 'AppController@delete_kriteria');
+
 
 // ==============================================================================
 // ======================== ALL ROUTE FOR REGISTER PAGE =========================

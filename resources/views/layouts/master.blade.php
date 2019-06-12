@@ -43,17 +43,13 @@
                         <div id="navigation">
                             <!-- Navigation Menu-->
                             <ul class="navigation-menu">
-                                <li class="has-submenu">
-                                    <a href="/">
-                                        <span><i class="ti-home"></i></span><span> Beranda </span> </a>
-                                </li>
 
                                 <!-- PASIEN -->
                                 <li class="has-submenu">
                                     <a href="#"> <span><i class="ti-user"></i></span><span> Pasien </span> </a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="/pasien/add"  class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-sm" style="text-align: left;"><i class="mdi mdi-account-plus" style="color:black;"></i>   Tambah Pasien</a>
+                                            <a class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-sm" style="text-align: left;"><i class="mdi mdi-account-plus" style="color:black;"></i>   Tambah Pasien</a>
                                         </li>
                                         <li>
                                             <a href="/pasien" style="color:black;"><i class=" mdi mdi-format-list-bulleted" style="color:black;"></i>   Daftar Pasien</a>
@@ -112,7 +108,7 @@
                                     <a href="/pasien/new/id" class="btn btn-primary" style="width: 220px;">Pasien Baru</a>
                                     <br>
                                     <br>
-                                    <a href="/pasien/new/id" class="btn btn-danger" style="width: 220px;">Pasien Pengobatan Ulang</a>
+                                    <a href="/pasien/old/id" class="btn btn-danger" style="width: 220px;">Pasien Pengobatan Ulang</a>
                                     </center>
                                     
                                 </div>
@@ -138,7 +134,7 @@
                                                 <i class="mdi mdi-account-plus" style="font-size:50px;">
                                                 </i>
                                                 <br>
-                                                <a href="register.php" style="color:#808080"> Tambah Akun</a>
+                                                <a href="/register" style="color:#808080"> Tambah Akun</a>
                                                 <br>
                                                 <br>
                                                 <i class="mdi mdi-account-card-details" style="font-size:50px;">
@@ -162,7 +158,7 @@
                                                 <i class="mdi mdi mdi-book-multiple" style="font-size:50px;">
                                                 </i>
                                                 <br>
-                                                <a href="referensi-kriteria.php" style="color:#808080"> Referensi Kriteria</a>
+                                                <a href="/referensi/kriteria" style="color:#808080"> Referensi Kriteria</a>
                                                 </center>
                                             </div>
                                         </div>

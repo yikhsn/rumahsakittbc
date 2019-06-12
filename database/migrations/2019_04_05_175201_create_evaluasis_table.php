@@ -16,13 +16,13 @@ class CreateEvaluasisTable extends Migration
         Schema::create('evaluasis', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama');
-            $table->unsignedInteger('jenis_id');
+            $table->unsignedInteger('jenis_penyakit_id');
             $table->string('keterangan');
             $table->timestamps();
         });
 
         Schema::table('evaluasis', function (Blueprint $table) {
-            $table->foreign('jenis_id')
+            $table->foreign('jenis_penyakit_id')
                   ->references('id')
                   ->on('jenis_penyakits')
                   ->onDelete('cascade');

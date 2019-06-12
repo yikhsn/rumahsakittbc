@@ -108,7 +108,7 @@
                                     </td>
 
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">
-                                        {{ $pasien->created_at }}
+                                        {{ date('m-d-Y', strtotime($pasien->created_at)) }}
                                     </td>
 
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">

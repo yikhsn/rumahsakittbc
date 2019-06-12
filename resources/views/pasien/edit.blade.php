@@ -63,8 +63,7 @@
                                         <label for="tanggal_lahir">Tanggal Lahir</label>
                                         <div class="col-md-10">
                                             <input type="date" class="form-control"
-                                                value="{{ $pasien->tanggal_lahir->format('m-d-Y') }}"
-                                                placeholder="Tanggal Lahir Pasien" 
+                                                value="{{ $pasien->tanggal_lahir }}"
                                                 id="tanggal_lahir" name="tanggal_lahir" required>
                                         </div>
                                     </div>
@@ -164,9 +163,7 @@
                                     <div class="form-group">
                                         <label>Alamat Kediaman</label>
                                         <div class="col-md-10">
-                                            <textarea class="form-control" required rows="5" placeholder="RT/RW/Jalan" name="alamat" id="alamat">
-                                                {{ $pasien->alamat }}
-                                            </textarea>
+                                            <textarea class="form-control" required rows="5" placeholder="RT/RW/Jalan" name="alamat" id="alamat">{{ $pasien->alamat }}</textarea>
                                         </div>
                                     </div>
                                     <br>
@@ -176,28 +173,9 @@
                                     <b>Riwayat Pasien </b>
                                     </center>
                                     <hr>
-                                    <!-- Riwayat Pasien -->
-                                    <!-- Tanggal Pengobatan -->
-                                    <div class="form-group">
-                                        <label>Tanggal Pengobatan</label>
-                                        <div class="col-md-10">
-                                            <input type="date" class="form-control" 
-                                                value="" 
-                                                name="" disabled>
-                                        </div>
-                                    </div>
 
-                                    <!-- Kondisi Pasien -->
-                                    <div class="form-group">
-                                        <label>Kondisi Pasien</label>
-                                        <div class="col-md-10">
-                                            <select class="form-control" id="sel1">
-                                                <option>BTA (+)</option>
-                                                <option>BTA (-)</option>
-                                                <option>Ekstra Paru</option>
-                                            </select>
-                                        </div>
-                                    </div>
+
+                                    <!-- RIWAYAT PASIEN -->
 
                                     <!-- Jumlah Sputum Pasien -->
                                     <div class="form-group">
@@ -222,478 +200,228 @@
                                     </div>
 
                                     <!-- Riwayat Pengobatan dibawah Satu Bulan -->
-                                    <div class="form-group">
-                                        <label for="pengobatan_satu_bulan">Riwayat Pengobatan Dibawah Satu Bulan</label>
-                                        <div class="col-md-10">
-                                            <select class="form-control" id="pengobatan_satu_bulan" name="pengobatan_satu_bulan" required>
-                                                <option {{ (isset($pasien->pengobatan_satu_bulan) && $pasien->pengobatan_satu_bulan == 'Pernah') ? "selected=\"selected\"" : "" }} value="Pernah">Pernah</option>
-                                                <option {{ (isset($pasien->pengobatan_satu_bulan) && $pasien->pengobatan_satu_bulan == 'Belum') ? "selected=\"selected\"" : "" }} value="Belum">Belum</option>
-                                            </select>
+                                    @if(!is_null($pasien->pengobatan_satu_bulan))
+                                        <div class="form-group">
+                                            <label for="pengobatan_satu_bulan">Riwayat Pengobatan Dibawah Satu Bulan</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control" id="pengobatan_satu_bulan" name="pengobatan_satu_bulan" required>
+                                                    <option {{ (isset($pasien->pengobatan_satu_bulan) && $pasien->pengobatan_satu_bulan == 'Pernah') ? "selected=\"selected\"" : "" }} value="Pernah">Pernah</option>
+                                                    <option {{ (isset($pasien->pengobatan_satu_bulan) && $pasien->pengobatan_satu_bulan == 'Belum') ? "selected=\"selected\"" : "" }} value="Belum">Belum</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
                                     <!-- Catatan Lain -->
                                     <div class="form-group">
-                                        <label for="catatan_kesehatan">Catatan :</label>
+                                        <label for="catatan_kesehatan">Catatan Kesehatan:</label>
                                         <div class="col-md-10">
                                             <textarea class="form-control" rows="5" 
                                                 placeholder="Catatan Kesehatan dan Riwayat Pasien, Termasuk Informasi khusus seputar Alergi, Penanganan Khusus, Penyakit Bawaan, DLL" 
-                                                name="catatan_kesehatan" id="catatan_kesehatan" required>
-                                                {{ $pasien->catatan_kesehatan }}
-                                            </textarea>
+                                                name="catatan_kesehatan" id="catatan_kesehatan">{{ $pasien->catatan_kesehatan }}</textarea>
                                         </div>
                                     </div>
 
+                                    @if(!is_null($pasien->awal_pengobatan_sebelumnya))
+                                        <div class="form-group">
+                                            <label>Awal Pengobatan Sebelumnya</label>
+                                            <div class="col-md-10">
+                                                <input type="date" class="form-control" 
+                                                    value="{{ $pasien->awal_pengobatan_sebelumnya }}"
+                                                    name="awal_pengobatan_sebelumnya" id="awal_pengobatan_sebelumnya" 
+                                                    required>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if(!is_null($pasien->akhir_pengobatan_sebelumnya))
+                                        <div class="form-group">
+                                            <label>Akhir Pengobatan Sebelumnya</label>
+                                            <div class="col-md-10">
+                                                <input type="date" class="form-control"
+                                                    value="{{ $pasien->akhir_pengobatan_sebelumnya }}"
+                                                    name="akhir_pengobatan_sebelumnya" id="akhir_pengobatan_sebelumnya" 
+                                                    required>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if(!is_null($pasien->kelangkapan_pengobatan_sebelumnya))
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <label for="">Kelengkapan Pengobatan</label>
+                                                <select class="form-control" name="kelangkapan_pengobatan_sebelumnya" id="kelangkapan_pengobatan_sebelumnya" required>
+                                                    <option  {{ (isset($pasien->kelangkapan_pengobatan_sebelumnya) && $pasien->kelangkapan_pengobatan_sebelumnya == '1-2 Bulan') ? "selected=\"selected\"" : "" }}value="1-2 Bulan">1-2 Bulan</option>
+                                                    <option  {{ (isset($pasien->kelangkapan_pengobatan_sebelumnya) && $pasien->kelangkapan_pengobatan_sebelumnya == '2-3 Bulan') ? "selected=\"selected\"" : "" }}value="2-3 Bulan">2-3 Bulan</option>
+                                                    <option  {{ (isset($pasien->kelangkapan_pengobatan_sebelumnya) && $pasien->kelangkapan_pengobatan_sebelumnya == '3-4 Bulan') ? "selected=\"selected\"" : "" }}value="3-4 Bulan">3-4 Bulan</option>
+                                                    <option  {{ (isset($pasien->kelangkapan_pengobatan_sebelumnya) && $pasien->kelangkapan_pengobatan_sebelumnya == '4-5 Bulan') ? "selected=\"selected\"" : "" }}value="4-5 Bulan">4-5 Bulan</option>
+                                                    <option  {{ (isset($pasien->kelangkapan_pengobatan_sebelumnya) && $pasien->kelangkapan_pengobatan_sebelumnya == '6 Bulan') ? "selected=\"selected\"" : "" }}value="6 Bulan">6 Bulan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if(!is_null($pasien->tempat_pengobatan_sebelumnya))
+                                        <div class="form-group">
+                                            <label>Tempat Pengobatan Sebelumnya</label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control"
+                                                    value="{{ $pasien->tempat_pengobatan_sebelumnya }}"
+                                                    name="tempat_pengobatan_sebelumnya" id="tempat_pengobatan_sebelumnya" 
+                                                    required>
+                                            </div>
+                                    </div>
+                                    @endif
+
+                                    @if(!is_null($pasien->tempat_pengobatan_sebelumnya))
+                                        <div class="form-group">
+                                            <label>Nama Dokter Pengobatan Sebelumnya</label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" 
+                                                    value=" {{ $pasien->nama_dokter_sebelumnya }}"
+                                                    name="nama_dokter_sebelumnya" id="nama_dokter_sebelumnya" 
+                                                    required>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if(!is_null($pasien->alamat_pengobatan_sebelumnya))
+                                    <div class="form-group">
+                                        <label>Alamat Pengobatan Sebelumnya</label>
+                                        <div class="col-md-10">
+                                            <textarea class="form-control" required rows="5" name="alamat_pengobatan_sebelumnya" id="alamat_pengobatan_sebelumnya" required>{{ $pasien->alamat_pengobatan_sebelumnya }}</textarea>
+                                        </div>
+                                    </div>
+                                    @endif
+
+                                    @if(!is_null($pasien->jumlah_sputum_sebelumnya))
+                                    <div class="form-group">
+                                        <label>Jumlah Spesimen Sputum SPS Sebelumnya</label>
+                                        <div class="col-md-10">
+                                            <input type="number" class="form-control"
+                                                value="{{ $pasien->jumlah_sputum_sebelumnya }}"
+                                                name="jumlah_sputum_sebelumnya" id="jumlah_sputum_sebelumnya" 
+                                                required> 
+                                        </div>
+                                    </div>
+                                    @endif
+                                    
+                                    @if(!is_null($pasien->hasil_sputum_sebelumnya))                                    
+                                        <div class="form-group">
+                                            <label>Hasil Pemeriksaan Sputum SPS Sebelumnya</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control" id="hasil_sputum_sebelumnya" name="hasil_sputum_sebelumnya" required>
+                                                    <option {{ (isset($pasien->hasil_sputum_sebelumnya) && $pasien->hasil_sputum_sebelumnya == 'Positif') ? "selected=\"selected\"" : "" }} value="Positif">Positif</option>
+                                                    <option {{ (isset($pasien->hasil_sputum_sebelumnya) && $pasien->hasil_sputum_sebelumnya == 'Negatif') ? "selected=\"selected\"" : "" }} value="Negatif">Negatif</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    
+                                    @if(!is_null($pasien->status_kesembuhan_sebelumnya))
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <label for=""> Status Kesembuhan pada Pengobatan Sebelumnya</label>
+                                                <select class="form-control" id="status_kesembuhan_sebelumnya" name="status_kesembuhan_sebelumnya" required>
+                                                    <option {{ (isset($pasien->status_kesembuhan_sebelumnya) && $pasien->status_kesembuhan_sebelumnya == 'Sembuh') ? "selected=\"selected\"" : "" }} value="Sembuh">Sembuh</option>
+                                                    <option {{ (isset($pasien->status_kesembuhan_sebelumnya) && $pasien->status_kesembuhan_sebelumnya == 'Belum Sembuh') ? "selected=\"selected\"" : "" }} value="Belum Sembuh">Belum Sembuh</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    <br>
+                                    <br>
+
+
+                                    <!-- KRITERIA EVALUASI -->
                                     <hr>
                                         <center>
                                             <b>Kriteria Evaluasi<b>
                                         </center>
                                     <hr>
-                                    <!-- Kriteria Evaluasi -->
 
-                                    <!--  Evaluasi BTA (+) -->
-                                    <label for=""> Evaluasi BTA (+)</label>
-                                    <div class="table">
-                                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                            <thead>
-                                                <th>Pilih</th>
-                                                <th>Evaluasi</th>
-                                                <th>Kriteria Evaluasi</th>
-                                                
-                                            </thead>
-                                            <tbody>
-
-                                                <!-- sembuh -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Sembuh</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>Pemeriksaan pasien pada akhir pengobatan (AP) dengan hasil
-                                                                BTA Negatif (-) dan minimal satu kali pemeriksaan
-                                                                sebelumnya negatif (-)
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <!-- Pengobatan Lengkap -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Pengobatan Lengkap</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                Pemeriksaan pasien pada akhir intensif, hasil BTA negatif (-)
-                                                                dan melanjutkan pengobatan sampai dengan selesai
-                                                                <hr>
-                                                                Pemeriksaan pasien pada pengobatan bulan ke3, ke5 dan akhir
-                                                                pengobatan tidak dilakukan pemeriksaan ulang (follow Up),
-                                                                pasien hanya minum obat sampai selesai
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <!-- Default -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Default</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                ( 1-2 bulan tidak berobat teratur) Pemeriksaan pada hasil BTA
-                                                                SPS(Sewaktu, Pagi, Sewaktu) hasil positif (+), lanjutkan
-                                                                pengobatan sampai seluruh dosis selesai dan 1 bulan sebelum
-                                                                akhir pengobatan (AP) harus diperiksa dahak kembali.
-                                                                <hr>
-                                                                ( >=2 bulan tidak berobat teratur) Pemeriksaan dengan hasil
-                                                                satu atau lebih hasil BTA positif (+) maka lanjutkan
-                                                                pengobatan atau rujuk (mungkin kasus kronik)
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Gagal -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Gagal</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                Pemeriksaan dengan hasil satu atau lebih hasil BTA positif
-                                                                (+) maka lanjutkan pengobatan atau rujuk (mungkin kasus Kronik )
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Pindah -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Pindah</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                Pemeriksaan pasien dilakukan sebulan sebelum akhir
-                                                                pengobatan dengan hasil BTA positif (+), dan ganti OAT
-                                                                (Obat Anti Tuberkulosis) kategori 2 dari awal
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                
-                                                <!-- Meninggal -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Meninggal</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                Hasil pemeriksaan pasien sebelumnya tidak diketahui
-                                                                Pemeriksaan pasien mengalami komplikasi
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- / Evaluasi BTA (+) -->
-                                    <!-- Evaluasi BTA (-) -->
-                                    <label for=""> Evaluasi BTA (-)</label>
-                                    <div class="table">
-                                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                            <thead>
-                                                <th>Pilih</th>
-                                                <th>Evaluasi</th>
-                                                <th>Kriteria Evaluasi</th>
-                                                
-                                            </thead>
-                                            <tbody>
-                                                <!-- sembuh -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Pengobatan Lengkap</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>Pemeriksaan pasien dilakukan berdasarkan keterangan hasil
-                                                                pemeriksaan sebelumnya atau pasien melakukan pengobatan
-                                                                ulang.
-                                                            </p>
-                                                            <hr>
-                                                            <p>
-                                                                Pemeriksaan pasien pada akhir intensif dengan hasil BTA
-                                                                negatif (-), pengobatan dilanjutkan sampai selesai
-                                                            </p>
-                                                            <hr>
-                                                            <p>
-                                                                Pemeriksaan pasien pada pengobatan bulan ke3, ke5 dan
-                                                                akhir pengobatan tidak dilakukan pemeriksaan ulang (follow
-                                                                Up), pasien hanya minum obat sampai selesai
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Pengobatan Lengkap -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Default</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                Pemeriksaan pasien pada hasil BTA(-)/Ro(+) atau
-                                                                tuberkulosis extra paru lanjutkan pengobatan sampai seluruh
-                                                                dosis selesai
-                                                                <hr>
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Default -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Gagal</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                ( 1-2 bln tidak berobat teratur) Pemeriksaan pasien pada SPS
-                                                                dan lanjutkan pengobatan, bila hasil BTA (-) / Ro(+) atau
-                                                                tuberkulosis paru, lanjutkan pengobatan samapi seluruh
-                                                                dosis selesai
-                                                            </p>
-                                                            <hr>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Gagal -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Pindah</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                ( >=2 bulan tidak berobat teratur) Pemeriksaan pasien pada
-                                                                SPS (sewaktu Pagi Sewaktu) dengan hasil BTA(-)/Ro(+)
-                                                                atau tuberkulosis paru, pengobatan dihentikan, pasien
-                                                                diobservasi bila gejalanya semakin parah perlu dilakukan
-                                                                pemeriksaan kembali (SPS dan atau biakan)
-                                                                Pemeriksaan pasien pada akhir masa intensif pengobatan
-                                                                dengan hasil BTA positif (+), ganti dengan kategori 2 mulai
-                                                                dari awal
-                                                                <hr>
-                                                                Pemeriksaan dengan hasil satu atau lebih hasil BTA positif
-                                                                (+) maka lanjutkan pengobatan atau rujuk (mungkin kasus
-                                                                kronik)
-                                                                <hr>
-                                                                Pemeriksaan pasien dilakukan berdasarkan keterangan hasil
-                                                                pemeriksaan sebelumnya atau pasien melakukanpengobatan ulang
-                                                            </p>
-                                                            <hr>
-                                                            <p>
-                                                                Hasil Pemeriksaan pasien sebelumnya tidak diketahui
-                                                                <hr>
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Meninggal -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Meninggal</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                Hasil pemeriksaan pasien sebelumnya tidak diketahui
-                                                                Pemeriksaan pasien mengalami komplikasi
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- / Evaluasi BTA (-) -->
-                                    <!-- Extra Paru -->
-                                    <label for=""> Extra Paru</label>
-                                    <div class="table">
-                                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                            <thead>
-                                                <th>Pilih</th>
-                                                <th>Evaluasi</th>
-                                                <th>Kriteria Evaluasi</th>
-                                            </thead>
-                                            <tbody>
-                                                <!-- Pengobatan Lengkap -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Pengobatan Lengkap</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                Pemeriksaan pasien dilakukan berdasarkan keterangan
-                                                                hasil pemeriksaan sebelumnya atau pasien melakukan
-                                                                pengobatan ulang.
-                                                            </p>
-                                                            <hr>
-                                                            <p>
-                                                                Pemeriksaan pasien pada pengobatan bulan ke3, ke5 dan
-                                                                akhir pengobatan tidak dilakukan pemeriksaan ulang
-                                                                (follow Up), pasien hanya minum obat sampai selesai
-                                                            </p>
-                                                            <hr>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Default -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Default</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                Pemeriksaan pasien pada hasil BTA(-)/Ro(+) atau
-                                                                tuberkulosis extra paru lanjutkan pengobatan sampai
-                                                                seluruh dosis selesai
-                                                                <hr>
-                                                            </p>
-                                                            <p>
-                                                                (1-2 bulan tidak berobat teratur) Pemeriksaan pasien pada
-                                                                SPS dengan hasil BTA (-) atau tuberkulois extra paru,
-                                                                lanjutkan pengobatan samapai seluruh dosisi selesai
-                                                                <hr>
-                                                            </p>
-                                                            <p>
-                                                                ( >=2 bulan tidak berobat teratur) Pemeriksaan pasien
-                                                                pada SPS dengan hasil BTA (-) atau tuberkulosis ektra
-                                                                paru, pengobatan dihentikan, pasien diobservasi bila
-                                                                gejalanya semakin parah perlu dilakukan pemeriksaan
-                                                                kembali (SPS dan atau biakan)
-                                                                <hr>
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Gagal -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Gagal</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                Pemeriksaan pasien dengan hasil BTA (-) atau
-                                                                tuberkulosis extra paru, maka lanjutkan pengobatan atau
-                                                                rujik (mungkin kasus kronik)
-                                                            </p>
-                                                            <hr>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Pindah -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Pindah</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                Pemeriksaan pasien dilakukan sebulan sebelum akhir
-                                                                pengobatan dengan hasil BTA(-) atau tuberkulosis extra
-                                                                paru, lanjutkan pengobatan atu ganti OAT (Obat Anti
-                                                                Tuberkulosis) kategori 2 mulai dari awal
-                                                            </p>
-                                                            <hr>
-                                                            <p>
-                                                                Hasil Pemeriksaan pasien sebelumnya tidak diketahui
-                                                                <hr>
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <!-- Meninggal -->
-                                                <tr>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <input type="radio" name="optradio">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <label for="">Meninggal</label>
-                                                    </td>
-                                                    <td>
-                                                        <div class="radio">
-                                                            <p>
-                                                                
-                                                                Pemeriksaan pasien mengalami komplikasi
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="jenis_penyakit_id">Tipe Pasien</label>
+                                            <select  id="" class="form-control" name="jenis_penyakit_id">
+                                                @foreach($jenis_penyakits as $jenis_penyakit)
+                                                    <option 
+                                                        {{ (isset($pasien->jenis_penyakit_id) && $pasien->jenis_penyakit_id == $jenis_penyakit->id) ? "selected=\"selected\"" : "" }}
+                                                        value="{{ $jenis_penyakit->id }}">
+                                                        {{ $jenis_penyakit->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
 
-                                    <!-- Pendamping Minum Obat -->
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="evaluasi_id">Evaluasi</label>
+                                            <select id="" class="form-control" name="evaluasi_id">
+                                                @foreach($evaluasis as $evaluasi)
+                                                    <option 
+                                                        {{ (isset($pasien->evaluasi_id) && $pasien->evaluasi_id == $evaluasi->id) ? "selected=\"selected\"" : "" }}
+                                                        value="{{ $evaluasi->id }}">
+                                                        {{ $evaluasi->nama }} - {{ $evaluasi->jenis_penyakit->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+
                                     <br>
                                     <br>
+
+
+                                    <!-- DOKTER DAN RUMAHSAKIT -->
+                                    <hr>
+                                        <center>
+                                            <b>Dokter dan Rumah Sakit<b>
+                                        </center>
+                                    <hr>
+
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="rumahsakit_id">Tipe Pasien</label>
+                                            <select  id="rumahsakit_id" class="form-control" name="rumahsakit_id">
+                                                @foreach($rumahsakits as $rumahsakit)
+                                                    <option 
+                                                        {{ (isset($pasien->rumahsakit_id) && $pasien->rumahsakit_id == $rumahsakit->id) ? "selected=\"selected\"" : "" }}
+                                                        value="{{ $rumahsakit->id }}">
+                                                        {{ $rumahsakit->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label for="dokter_id">Evaluasi</label>
+                                            <select id="dokter_id" class="form-control" name="dokter_id">
+                                                @foreach($dokters as $dokter)
+                                                    <option 
+                                                        {{ (isset($pasien->dokter_id) && $pasien->dokter_id == $dokter->id) ? "selected=\"selected\"" : "" }}
+                                                        value="{{ $dokter->id }}">
+                                                        {{ $dokter->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                    <br>
+
+                                    <!-- PENDAMPING MINUM OBAT -->
                                     <hr>
                                     <center>
                                     <b>Identitas Pendamping Minum Obat</b>
                                     </center>
                                     <hr>
-                                    <br>
-                                    <br>
 
                                     <!-- Nama Lengkap Pendamping -->
                                     <div class="form-group">
@@ -706,7 +434,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="nik_pendamping">NIK Pendamping</label>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control"
@@ -714,7 +442,7 @@
                                                 placeholder="NIK Pendamping" 
                                                 name="nik_pendamping" id="nik_pendamping" readonly>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="form-group">
                                         <label for="usia_pendamping">Usia Pendamping</label>
@@ -733,7 +461,7 @@
                                             <select class="form-control" id="hubungan_pasien" name="hubungan_pasien" required>
                                                 <option {{ (isset($pasien->pendamping->hubungan_pasien) && $pasien->pendamping->hubungan_pasien == 'Anak Kandung') ? "selected=\"selected\"" : "" }} value="Anak Kandung">Anak Kandung</option>
                                                 <option {{ (isset($pasien->pendamping->hubungan_pasien) && $pasien->pendamping->hubungan_pasien == 'Saudara Kandung') ? "selected=\"selected\"" : "" }} value="Saudara Kandung">Saudara Kandung</option>
-                                                <option {{ (isset($pasien->pendamping->hubungan_pasien) && $pasien->pendamping->hubungan_pasien == 'Orangtua Kandung') ? "selected=\"selected\"" : "" }} value="Orang Tua Kandung">Orangtua Kandung</option>
+                                                <option {{ (isset($pasien->pendamping->hubungan_pasien) && $pasien->pendamping->hubungan_pasien == 'Orangtua Kandung') ? "selected=\"selected\"" : "" }} value="Orangtua Kandung">Orangtua Kandung</option>
                                                 <option {{ (isset($pasien->pendamping->hubungan_pasien) && $pasien->pendamping->hubungan_pasien == 'Keluarga') ? "selected=\"selected\"" : "" }} value="Keluarga">Keluarga</option>
                                                 <option {{ (isset($pasien->pendamping->hubungan_pasien) && $pasien->pendamping->hubungan_pasien == 'Keluarga Angkat') ? "selected=\"selected\"" : "" }} value="Keluarga Angkat">Keluarga Angkat</option>
                                                 <option {{ (isset($pasien->pendamping->hubungan_pasien) && $pasien->pendamping->hubungan_pasien == 'Teman') ? "selected=\"selected\"" : "" }} value="Teman">Teman</option>
@@ -824,9 +552,7 @@
                                         <label for="alamat_pendamping">Jalan</label>
                                         <div class="col-md-10">
                                             <textarea class="form-control" rows="5" 
-                                                id="alamat_pendamping" name="alamat_pendamping" placeholder="RT/RW/Jalan">
-                                                {{ $pasien->pendamping->alamat }}
-                                            </textarea>
+                                                id="alamat_pendamping" name="alamat_pendamping" placeholder="RT/RW/Jalan">{{ $pasien->pendamping->alamat }}</textarea>
                                         </div>
                                     </div>
 

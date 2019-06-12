@@ -17,7 +17,7 @@
                             </div>
                             <div class="panel-body">
                                 
-                                <form method="post" action="/pasien/new/pendamping_store" class="form-horizontal" role="form">
+                                <form method="post" action="/pasien/old/pendamping_store" class="form-horizontal" role="form">
                                     
                                     {{ csrf_field() }}
                                     
@@ -145,9 +145,7 @@
                                         <label for="alamat">Jalan</label>
                                         <div class="col-md-10">
                                             <textarea class="form-control" rows="5" 
-                                                id="alamat" name="alamat" placeholder="RT/RW/Jalan">
-                                                {{ (isset( $pendamping->alamat )) ? $pendamping->alamat : '' }}
-                                            </textarea>
+                                                id="alamat" name="alamat" placeholder="RT/RW/Jalan">{{ (isset( $pendamping->alamat )) ? $pendamping->alamat : '' }}</textarea>
                                         </div>
                                     </div>
 

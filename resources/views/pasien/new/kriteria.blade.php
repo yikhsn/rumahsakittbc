@@ -79,7 +79,7 @@
                                                             <option 
                                                                 {{ (isset($pasien->evaluasi_id) && $pasien->evaluasi_id == $evaluasi->id) ? "selected=\"selected\"" : "" }}
                                                                 value="{{ $evaluasi->id }}">
-                                                                {{ $evaluasi->nama }} - 
+                                                                {{ $evaluasi->nama }} - {{ $evaluasi->jenis_penyakit->nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>

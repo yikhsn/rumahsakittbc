@@ -102,8 +102,7 @@
                                     <div class="form-group">
                                         <label>Alamat Kediaman</label>
                                         <div class="col-md-10">
-                                            <textarea class="form-control"  rows="5" placeholder="RT/RW/Jalan" name="alamat" id="alamat" required>
-                                            </textarea>
+                                            <textarea class="form-control"  rows="5" placeholder="RT/RW/Jalan" name="alamat" id="alamat" required></textarea>
                                         </div>
                                     </div>
 

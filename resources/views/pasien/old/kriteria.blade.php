@@ -19,7 +19,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="col-11">
-                                        <form action="/pasien/new/kriteria_store" method="post" class="form-horizontal">
+                                        <form action="/pasien/old/kriteria_store" method="post" class="form-horizontal">
                                             
                                             {{ csrf_field() }}
                                             
@@ -79,7 +79,7 @@
                                                             <option 
                                                                 {{ (isset($pasien->evaluasi_id) && $pasien->evaluasi_id == $evaluasi->id) ? "selected=\"selected\"" : "" }}
                                                                 value="{{ $evaluasi->id }}">
-                                                                {{ $evaluasi->nama }} - 
+                                                                {{ $evaluasi->nama }} - {{ $evaluasi->jenis_penyakit->nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>

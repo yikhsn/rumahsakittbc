@@ -21,15 +21,6 @@
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="tanggal_pengobatan">Tanggal Pengobatan</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" 
-                                    value="<?php echo date("d/m/Y"); ?>" disabled 
-                                    name="tanggal_pengobatan" id="tanggal_pengobatan">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <label for="hasil_sputum">Hasil Pemeriksaan Sputum</label>
                             <div class="col-md-10">
                                 <select class="form-control" name="hasil_sputum" id="hasil_sputum">
@@ -40,11 +31,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="jumlah_sputum">Jumlah Spesimen Sputum SPS</label>
+                            <label for="jumlah_sputum">Jumlah Spesimen Sputum Hasil Pemeriksaan</label>
                             <div class="col-md-10">
                                 <input type="number" class="form-control" 
                                     value="{{ (isset( $pasien->jumlah_sputum )) ? $pasien->jumlah_sputum : '' }}"
-                                    placeholder="Pasien Minimal Memiliki 3 Spesimen Spotum" 
+                                    placeholder="Jumlah Spesimen Sputum Hasil Pemeriksaan" 
                                     id="jumlah_sputum" name="jumlah_sputum">
                             </div>
                         </div>
@@ -60,20 +51,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Hasil Foto Toraks Pasien (Jika Ada)</label>
-                            <div class="col-md-10">
-                                <input type="file" data-buttontext="Select file" data-buttonname="btn-default"name="foto_toraks">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="catatan_kesehatan">Catatan :</label>
+                            <label for="catatan_kesehatan">Catatan Kesehatan:</label>
                             <div class="col-md-10">
                                 <textarea class="form-control" rows="5" 
                                     placeholder="Catatan Kesehatan dan Riwayat Pasien, Termasuk Informasi khusus seputar Alergi, Penanganan Khusus, Penyakit Bawaan, DLL" 
-                                    name="catatan_kesehatan" id="catatan_kesehatan" required>
-                                    {{ (isset( $pasien->catatan_kesehatan )) ? $pasien->catatan_kesehatan : '' }}
-                                </textarea>
+                                    name="catatan_kesehatan" id="catatan_kesehatan">{{ (isset( $pasien->catatan_kesehatan )) ? $pasien->catatan_kesehatan : '' }}</textarea>
                             </div>
                         </div>
 

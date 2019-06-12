@@ -15,4 +15,9 @@ class JenisPenyakit extends Model
     {
         return $this->hasMany('App\Models\Evaluasi');
     }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Models\Type');
+    }
 }

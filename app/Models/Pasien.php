@@ -28,9 +28,17 @@ class Pasien extends Model
         'pendamping_nik',
         'dokter_id',
         'rumahsakit_id',
+        'is_done',
+        'awal_pengobatan_sebelumnya',
+        'akhir_pengobatan_sebelumnya',
+        'kelangkapan_pengobatan_sebelumnya',
+        'tempat_pengobatan_sebelumnya',
+        'nama_dokter_sebelumnya',
+        'alamat_pengobatan_sebelumnya',
+        'hasil_sputum_sebelumnya',
+        'jumlah_sputum_sebelumnya',
+        'status_kesembuhan_sebelumnya',
     ];
-
-    protected $dates = ['tanggal_lahir'];
 
     public function kecamatan()
     {

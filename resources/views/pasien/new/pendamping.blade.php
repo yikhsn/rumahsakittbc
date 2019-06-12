@@ -144,10 +144,7 @@
                                     <div class="form-group">
                                         <label for="alamat">Jalan</label>
                                         <div class="col-md-10">
-                                            <textarea class="form-control" rows="5" 
-                                                id="alamat" name="alamat" placeholder="RT/RW/Jalan">
-                                                {{ (isset( $pendamping->alamat )) ? $pendamping->alamat : '' }}
-                                            </textarea>
+                                            <textarea class="form-control" rows="5" id="alamat" name="alamat" placeholder="RT/RW/Jalan"> {{ (isset( $pendamping->alamat )) ? $pendamping->alamat : '' }}</textarea>
                                         </div>
                                     </div>
 

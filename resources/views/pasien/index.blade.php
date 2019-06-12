@@ -20,7 +20,7 @@
                         <div class="col-4">
                             <button type="button" class="btn btn-success"><i class="mdi mdi-magnify"></i></button>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Cetak Tabel <i class="mdi mdi-printer"></i></button>
-                            <a href="pasien/add" class="btn btn-danger"><i class="mdi mdi-plus"></i>Tambah Pasien</a>
+                            <a class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="mdi mdi-plus"></i>Tambah Pasien</a>
 
                         </div>
                     </div>
@@ -33,7 +33,6 @@
                                 <th style="font-family: segoe ui light; font-size:12px; text-align: center;">Nama</th>
                                 <th style="font-family: segoe ui light; font-size:12px; text-align: center;">Tanggal Pendaftaran</th>
                                 <th style="font-family: segoe ui light; font-size:12px; text-align: center;">Pendamping</th>
-                                <th style="font-family: segoe ui light; font-size:12px; text-align: center;">Durasi Pegobatan</th>
                                 <th style="font-family: segoe ui light; font-size:12px; text-align: center;">Tipe Pasien</th>
                                 <th style="font-family: segoe ui light; font-size:12px; text-align: center;">Kondisi Pasien</th>
                                 <th style="font-family: segoe ui light; font-size:12px; text-align: center;">Rumah Sakit</th>
@@ -49,14 +48,12 @@
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">
                                             {{ $pasien->nama }}
                                     </td>
-                                    <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $pasien->created_at }}</td>
+                                    <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ date('d-m-Y', strtotime($pasien->created_at)) }}</td>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">
                                             @if(!is_null($pasien->pendamping_nik))
                                                 {{ $pasien->pendamping->nama }}
                                             @endif
                                     </td>
-                                    <td style="font-family: segoe ui; font-size:13px; text-align: center;">6 Bulan</td>
-                                    
 
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">
                                         @if(!is_null($pasien->type_id))
