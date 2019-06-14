@@ -15,10 +15,9 @@
                         </div>
                         <div class="row">
                             <div class="col-8">
-                                <input type="text" class="form-control" placeholder ="Cari..." >
+                                <input type="text" class="form-control searchBoxDokter" placeholder ="Cari disini (masukkan nama dokter)..." >
                             </div>
                             <div class="col-4">
-                                <button type="button" class="btn btn-success"><i class="mdi mdi-magnify"></i></button>
                                 <a href="/dokter/add" class="btn btn-danger"><i class="mdi mdi-plus"></i>Tambah Dokter</a>
                             </div>
                         </div>
@@ -36,7 +35,7 @@
                                     
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="searchDokterRes">
                                 @foreach($dokters as $dokter)
                                 <tr>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $number += 1 }}</td>

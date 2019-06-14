@@ -15,11 +15,10 @@
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            <input type="text" class="form-control" placeholder ="Cari disini...." >
+                            <input type="text" class="form-control searchBoxPasien" placeholder ="Cari disini (masukkan nama pasien)">
                         </div>
                         <div class="col-4">
-                            <button type="button" class="btn btn-success"><i class="mdi mdi-magnify"></i></button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Cetak Tabel <i class="mdi mdi-printer"></i></button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".Cetak_daftar_pasien">Cetak Tabel <i class="mdi mdi-printer"></i></button>
                             <a class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="mdi mdi-plus"></i>Tambah Pasien</a>
 
                         </div>
@@ -40,7 +39,7 @@
                                 <th style="font-family: segoe ui light; font-size:12px; text-align: center;">Opsi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="searchPasienRes">
                             @foreach($pasiens as $pasien)
                                 <tr>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $number += 1 }}</td>
@@ -95,10 +94,9 @@
         <!-- end row -->
         </div> <!-- end container -->
 
-
         <!-- Modal Untuk Cetak Tabel -->
-        
-        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+                    
+        <div class="modal fade Cetak_daftar_pasien" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     
@@ -135,16 +133,10 @@
                             <center>
                             <button  type="button" class="btn btn-info btn-rounded">Cetak Semua Data <i class="mdi mdi-printer"></i></button>
                             </center>
-                            
-                        </form>
-                        
+                        </form>               
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-            
+        </div><!-- /.modal -->                  
     </div>
-
-
-               
 @endsection

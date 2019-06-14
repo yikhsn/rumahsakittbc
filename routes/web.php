@@ -20,7 +20,7 @@ Route::post('/rumahsakit/{id}/update', 'RumahSakitController@update');
 // ========================= ALL ROUTE FOR PASIEN DATA ==========================
 // ==============================================================================
 Route::get('/pasien', 'PasienController@index');
-
+Route::get('/pasien/search', 'PasienController@search');
 
 // start route for add new pasien
 Route::get('/pasien/new/id', 'PasienBaruController@new_pasien_id');

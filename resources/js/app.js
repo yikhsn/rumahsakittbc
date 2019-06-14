@@ -1,33 +1,211 @@
+require('bootstrap');
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import { elements } from './views/base';
+import SearchPasien from './models/SearchPasien';
+import * as SearchPasienView from './views/SearchPasienView';
+import SearchDokter from './models/SearchDokter';
+import * as SearchDokterView from './views/SearchDokterView';
+import SearchRumahSakit from './models/SearchRumahSakit';
+import * as SearchRumahSakitView from './views/SearchRumahSakitView';
+import * as SelectProvinsiView from './views/SelectProvinsiView';
+import SelectKabupaten from './models/SelectKabupaten';
+import * as SelectKabupatenView from './views/SelectKabupatenView';
+import SelectKecamatan from './models/SelectKecamatan';
+import * as SelectKecamatanView from './views/SelectKecamatanView';
+import SelectEvaluasi from './models/SelectEvaluasi';
+import * as SelectEvaluasiView from './views/SelectEvaluasiView';
+import * as SelectJenisView from './views/SelectJenisView';
+import SelectDokter from './models/SelectDokter';
+import * as SelectDokterView from './views/SelectDokterView';
+import * as SelectRumahsakitView from './views/SelectRumahsakitView';
 
-require('./bootstrap');
+const state = {};
 
-window.Vue = require('vue');
+console.log('File App.js is loaded');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+console.log(document.getElementById('provinsi_id'));
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+// PASIEN CONTROLLER
+const controlSearchPasien = async () => {
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+    const query = SearchPasienView.getInput();
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+    if (query) {
 
-const app = new Vue({
-    el: '#app'
+        state.search = new SearchPasien(query);
+
+        SearchPasienView.clearResult();
+
+        try {
+            await state.search.getResults();
+
+            SearchPasienView.renderResult(state.search.result);
+        } catch (error) {
+            console.log(`error while trying get data: ${error}`);      
+        }
+    }
+}
+
+// DOKTER CONTROLLER
+const controlSearchDokter = async () => {
+
+    const query = SearchDokterView.getInput();
+
+    if (query) {
+
+        state.search = new SearchDokter(query);
+
+        SearchDokterView.clearResult();
+
+        try {
+            await state.search.getResults();
+
+            SearchDokterView.renderResult(state.search.result);
+        } catch (error) {
+            console.log(`error while trying get data: ${error}`);      
+        }
+    }
+}
+
+
+// RUMAH SAKIt CONTROLLER
+const controlSearchRumahSakit = async () => {
+
+    const query = SearchRumahSakitView.getInput();
+
+    if (query) {
+
+        state.search = new SearchRumahSakit(query);
+
+        SearchRumahSakitView.clearResult();
+
+        try {
+            await state.search.getResults();
+
+            SearchRumahSakitView.renderResult(state.search.result);
+        } catch (error) {
+            console.log(`error while trying get data: ${error}`);      
+        }
+    }
+}
+
+const controlProvinsiSelect = async () => {
+    const provinsiId = SelectProvinsiView.getId();
+
+    if (provinsiId) {
+        state.kabupaten = new SelectKabupaten(provinsiId);
+        
+        SelectKabupatenView.clearResult();
+
+        SelectKecamatanView.clearResult();
+
+        try {
+            await state.kabupaten.getResults();
+
+            SelectKabupatenView.renderResult(state.kabupaten.result);
+        } catch (error) {
+            console.log(`error whilte trying to get data: ${error}`);
+        }
+    }
+}
+
+const controlKabupatenSelect = async () => {
+    const kabupatenId = SelectKabupatenView.getId();
+
+    if (kabupatenId) {
+        state.kecamatan = new SelectKecamatan(kabupatenId);
+        
+        SelectKecamatanView.clearResult();
+
+        try {
+            await state.kecamatan.getResults();
+
+            SelectKecamatanView.renderResult(state.kecamatan.result);
+        } catch (error) {
+            console.log(`error whilte trying to get data: ${error}`);
+        }
+    }
+}
+
+const controlJenisSelect = async () => {
+    const jenis_penyakit_id = SelectJenisView.getId();
+
+    if (jenis_penyakit_id) {
+        state.evaluasi = new SelectEvaluasi(jenis_penyakit_id);
+        
+        SelectEvaluasiView.clearResult();
+
+        try {
+            await state.evaluasi.getResults();
+
+            SelectEvaluasiView.renderResult(state.evaluasi.result);
+        } catch (error) {
+            console.log(`error whilte trying to get data: ${error}`);
+        }
+    }
+}
+
+const controlRumahsakitSelect = async () => {
+    const rumahsakit_id = SelectRumahsakitView.getId();
+
+    if (rumahsakit_id) {
+        state.evaluasi = new SelectDokter(rumahsakit_id);
+        
+        SelectDokterView.clearResult();
+
+        try {
+            await state.evaluasi.getResults();
+
+            SelectDokterView.renderResult(state.evaluasi.result);
+        } catch (error) {
+            console.log(`error whilte trying to get data: ${error}`);
+        }
+    }
+}
+
+
+// elements.searchBoxDokter.addEventListener('keyup', () => {
+//     console.log('search dokter is typed');
+    
+//     controlSearchDokter();
+// });
+
+// elements.searchBoxPasien.addEventListener('keyup', () => {
+//     console.log('search pasien is typed');
+
+//     controlSearchPasien();
+// });
+
+// elements.searchBoxRumahSakit.addEventListener('keyup', () => {
+//     console.log('search rumah sakit is typed');
+
+//     controlSearchRumahSakit();
+// });
+
+// elements.provinsiSelect.addEventListener('change', () => {
+//     console.log('provinsi is selected');
+
+//     controlProvinsiSelect();
+// });
+
+// elements.kabupatenSelect.addEventListener('change', () => {
+//     console.log('kabupaten is selected');
+
+//     controlKabupatenSelect();
+// });
+
+// elements.kecamatanSelect.addEventListener('change', () => {
+//     console.log('kecamatan is selected');
+// });
+
+// elements.jenisSelect.addEventListener('change', () => {
+//     console.log('jenis penyakits is selected');
+
+//     controlJenisSelect();
+// });
+
+elements.rumahsakitSelect.addEventListener('change', () => {
+    console.log('rumah sakit is selected');
+
+    controlRumahsakitSelect();
 });

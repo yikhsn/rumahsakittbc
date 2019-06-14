@@ -9,6 +9,8 @@
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="_token" content="{{ csrf_token() }}">
+
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico') }}">
         <!-- DataTables -->
@@ -21,6 +23,7 @@
         <link href="{{ URL::asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
         <script src="{{ URL::asset('assets/js/modernizr.min.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     </head>
     <body>
 
@@ -286,6 +289,7 @@
         <script src="{{ URL::asset('assets/pages/jquery.dashboard.js') }}"></script>
         <!-- App js -->
         <script src="{{ URL::asset('assets/js/jquery.core.js') }}"></script>
-        <script src="{{ URL::asset('assets/js/jquery.app.js') }}"></script>                                
+        <script src="{{ URL::asset('assets/js/jquery.app.js') }}"></script>
+        <script src="{{ URL::asset('js/app.js') }}"></script>
     </body>
 </html>

@@ -105,7 +105,7 @@ class PasienUlangController extends Controller
     public function old_pasien_kriteria(Request $request)
     {
         $pasien = $request->session()->get('pasien');
-        $jenis_penyakits = JenisPenyakit::where('type_id', '1')->get();
+        $jenis_penyakits = JenisPenyakit::where('type_id', '2')->get();
         $evaluasis = Evaluasi::all();
         $dokters = Dokter::all();
         $rumahsakits = Rumahsakit::all();

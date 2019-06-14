@@ -10,7 +10,7 @@
                 <h2 style="font-family: segoe ui light;">Edit Dokter</h2>
                 <br>
                 <div class="row">
-                    <div class ="col-sm-8">
+                    <div class ="col-sm-11">
                         <div class="panel panel-color panel-primary" style="border-color: #a2a2a2;">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Dokter {{ $dokter->nama }}</h3>
@@ -79,7 +79,7 @@
                                             
                                             <!-- session in form is not work yet -->
                                                 <div class ="col-md-3">
-                                                    <select class="form-control" required>
+                                                    <select name="provinsi_id" id="provinsi_id" class="form-control" required>
                                                         @foreach($provinsis as $provinsi)
                                                             <option {{ (isset($dokter->kecamatan) && $dokter->kecamatan->kabupaten->provinsi_id == $provinsi->id) ? "selected=\"selected\"" : "" }} value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
                                                         @endforeach
@@ -88,7 +88,7 @@
 
                                                 <!-- session in form is not work yet -->
                                                 <div class ="col-md-3">
-                                                    <select class="form-control" required>
+                                                    <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
                                                         @foreach($kabupatens as $kabupaten)
                                                             <option {{ (isset($dokter->kecamatan) && $dokter->kecamatan->kabupaten_id == $kabupaten->id) ? "selected=\"selected\"" : "" }} value="{{ $kabupaten->id }}">{{ $kabupaten->name }}</option>
                                                         @endforeach                 

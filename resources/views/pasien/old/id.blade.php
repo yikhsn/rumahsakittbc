@@ -45,7 +45,6 @@
                                         </div>
                                     </div>
 
-
                                     <div class="form-group">
                                         <label for="nik">NIK</label>
                                         <div class="col-md-10">
@@ -128,7 +127,7 @@
                                             
                                             <!-- session in form is not work yet -->
                                                 <div class ="col-md-3">
-                                                    <select class="form-control" required>
+                                                    <select name="provinsi_id" id="provinsi_id" class="form-control" required>
                                                         @foreach($provinsis as $provinsi)
                                                             <option {{ (isset($pasien->kecamatan) && $pasien->kecamatan->kabupaten->provinsi_id == $provinsi->id) ? "selected=\"selected\"" : "" }} value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
                                                         @endforeach
@@ -137,7 +136,7 @@
 
                                                 <!-- session in form is not work yet -->
                                                 <div class ="col-md-3">
-                                                    <select class="form-control" required>
+                                                    <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
                                                         @foreach($kabupatens as $kabupaten)
                                                             <option {{ (isset($pasien->kecamatan) && $pasien->kecamatan->kabupaten_id == $kabupaten->id) ? "selected=\"selected\"" : "" }} value="{{ $kabupaten->id }}">{{ $kabupaten->name }}</option>
                                                         @endforeach                 

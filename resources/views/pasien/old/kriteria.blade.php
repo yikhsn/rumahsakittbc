@@ -24,10 +24,10 @@
                                             {{ csrf_field() }}
                                             
                                             <div class="form-group">
-                                                <label for="rumah_sakit_id">Rumah Sakit</label>
+                                                <label for="rumahsakit_id">Rumah Sakit</label>
                                                 <div class="col-md-11">
                                                     <select class="form-control" 
-                                                        id="rumah_sakit_id" name="rumahsakit_id">
+                                                        id="rumahsakit_id" name="rumahsakit_id">
                                                         @foreach($rumahsakits as $rumahsakit)
                                                             <option 
                                                             {{ (isset($pasien->rumahsakit_id) && $pasien->rumahsakit_id == $rumahsakit->id) ? "selected=\"selected\"" : "" }}
@@ -59,7 +59,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-11">
                                                     <label for="jenis_penyakit_id">Tipe Pasien</label>
-                                                    <select  id="" class="form-control" name="jenis_penyakit_id">
+                                                    <select  id="jenis_penyakit_id" class="form-control" name="jenis_penyakit_id">
                                                         @foreach($jenis_penyakits as $jenis_penyakit)
                                                             <option 
                                                                 {{ (isset($pasien->jenis_penyakit_id) && $pasien->jenis_penyakit_id == $jenis_penyakit->id) ? "selected=\"selected\"" : "" }}
@@ -74,7 +74,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-11">
                                                     <label for="evaluasi_id">Evaluasi</label>
-                                                    <select id="" class="form-control" name="evaluasi_id">
+                                                    <select id="evaluasi_id" class="form-control" name="evaluasi_id">
                                                         @foreach($evaluasis as $evaluasi)
                                                             <option 
                                                                 {{ (isset($pasien->evaluasi_id) && $pasien->evaluasi_id == $evaluasi->id) ? "selected=\"selected\"" : "" }}

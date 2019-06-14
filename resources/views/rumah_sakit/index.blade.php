@@ -15,11 +15,10 @@
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            <input type="text" class="form-control" placeholder ="Cari..." >
+                            <input type="text" class="form-control searchBoxRumahSakit" placeholder ="Cari...">
                         </div>
                         <div class="col-4">
-                            <button type="button" class="btn btn-success"><i class="mdi mdi-magnify"></i></button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Cetak Tabel <i class="mdi mdi-printer"></i></button>
+                            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Cetak Tabel <i class="mdi mdi-printer"></i></button> -->
                             <a href="rumahsakit/add" class="btn btn-danger"><i class="mdi mdi-plus"></i>Tambah Rumah Sakit</a>
                         </div>
                     </div>
@@ -35,7 +34,7 @@
                                 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="searchRumahSakitRes">
                             @foreach($rumahsakits as $rumahsakit)
                                 <tr>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">{{ $number += 1 }}</td>
@@ -47,9 +46,7 @@
                                         {{ $rumahsakit->kecamatan->kabupaten->provinsi->name }}
                                     </td>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">
-                                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#datapasien">
                                             {{ $rumahsakit->pasiens->count() }}    
-                                        </button>
                                     </td>
                                     <td style="font-family: segoe ui; font-size:13px; text-align: center;">
                                         <a href="/rumahsakit/{{ $rumahsakit->id }}" style="color:teal; font-weight: bold;">Info</a>
@@ -159,4 +156,6 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </div><!-- end wrapper -->
+<script src="{{ URL::asset('js/app.js') }}"></script>                           
+
 @endsection       

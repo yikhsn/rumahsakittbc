@@ -13,6 +13,7 @@ use App\Models\Provinsi;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use DateTime;
+use DB;
 
 class PasienController extends Controller
 {
@@ -32,7 +33,8 @@ class PasienController extends Controller
             'dokter',
             'pendamping',
             'jenis_penyakit',
-            'type'
+            'type',
+            'evaluasi'
         ])->paginate(15);
 
         $data = json_decode($pasiens->toJSON());
@@ -174,4 +176,41 @@ class PasienController extends Controller
 
         return redirect('/pasien');
     }
+
+    public function search(Request $request)
+    {
+        if($request->ajax()){
+            $output = '';
+
+            // $pasiens = DB::table('pasiens')->where('nama', 'LIKE', '%'.$request->search.'%')->get();
+
+            // if($pasiens){
+            //     foreach($pasiens as $key => $pasien){
+            //         $output.=   '<tr>'.
+            //                         '<td style="font-family: segoe ui; font-size:13px; text-align: center;">1</td>'.
+            //                         '<td style="font-family: segoe ui; font-size:13px; text-align: center;">'.$pasien->nik.'</td>'.
+            //                         '<td style="font-family: segoe ui; font-size:13px; text-align: center;">'.$pasien->nama.'</td>'.
+            //                         '<td style="font-family: segoe ui; font-size:13px; text-align: center;">'.date('d-m-Y', strtotime($pasien->created_at)).'</td>'.
+            //                         '<td style="font-family: segoe ui; font-size:13px; text-align: center;">'.$pasien->pendamping->nama.'</td>'.
+            //                         '<td style="font-family: segoe ui; font-size:13px; text-align: center;">'.$pasien->type->type.'</td>'.
+            //                         '<td style="font-family: segoe ui; font-size:13px; text-align: center;">'.$pasien->jenis_penyakit->nama.'</td>'.
+            //                         '<td style="font-family: segoe ui; font-size:13px; text-align: center;">'.$pasien->rumahsakit->nama.'</td>'.
+            //                         '<td style="font-family: segoe ui; font-size:13px; text-align: center; background-color: #tomato; color:black;">'.$pasien->evaluasi->nama .'</td>'.
+            //                         '<td style="font-family: segoe ui; font-size:20px; text-align: center;">'.
+            //                             '<a href="/pasien/'.$pasien->id.'" style="color:teal; font-weight: bold;"><i class="mdi mdi-information"></i></a>'.
+            //                             '<a href="/pasien/'.$pasien->id.'/delete" style="color:tomato; font-weight: bold;"><i class="mdi mdi-delete"></i></a>'.
+            //                             '<a href="/pasien/'.$pasien->id.'/edit" style="color:purple; font-weight: bold;"><i class="mdi mdi-tooltip-edit"></i></a>'.
+            //                         '</td>'.
+            //                     '</tr>';
+            //     }
+
+            //     return Response($output);
+            // }
+        }
+
+        $output = '<h1>Bomb</h1>';
+
+        return Response($output);
+    }
+
 }
