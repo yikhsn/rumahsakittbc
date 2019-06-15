@@ -16,6 +16,11 @@ use DateTime;
 
 class PasienUlangController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function old_pasien_id(Request $request)
     {
         $provinsis = Provinsi::all();

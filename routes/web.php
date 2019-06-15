@@ -5,6 +5,16 @@
 // ==============================================================================
 Route::get('/', 'AppController@index');
 
+
+// ==============================================================================
+// ============================== MAIN ROUTE ====================================
+// ==============================================================================
+Route::get('/daftar-user', 'UserController@daftar_user');
+Route::get('/daftar-user/{id}/edit', 'UserController@edit');
+Route::post('/daftar-user/{id}/update', 'UserController@update');
+Route::get('/daftar-user/{id}/delete', 'UserController@delete');
+
+
 // ==============================================================================
 // ====================== ALL ROUTE FOR RUMAH SAKIT DATA ========================
 // ==============================================================================
@@ -16,11 +26,13 @@ Route::get('/rumahsakit/{id}/delete', 'RumahSakitController@delete');
 Route::get('/rumahsakit/{id}/edit', 'RumahSakitController@edit');
 Route::post('/rumahsakit/{id}/update', 'RumahSakitController@update');
 
+
 // ==============================================================================
 // ========================= ALL ROUTE FOR PASIEN DATA ==========================
 // ==============================================================================
 Route::get('/pasien', 'PasienController@index');
-Route::get('/pasien/search', 'PasienController@search');
+Route::post('/pasien/cetak', 'PasienController@cetak');
+
 
 // start route for add new pasien
 Route::get('/pasien/new/id', 'PasienBaruController@new_pasien_id');
@@ -58,6 +70,7 @@ Route::get('/pasien/{id}/delete', 'PasienController@delete');
 Route::get('/pasien/{id}/edit', 'PasienController@edit');
 Route::post('/pasien/{id}/update', 'PasienController@update');
 
+
 // ==============================================================================
 // ======================== ALL ROUTE FOR DOKTER DATA ===========================
 // ==============================================================================
@@ -68,6 +81,7 @@ Route::get('/dokter/{id}', 'DokterController@show');
 Route::get('/dokter/{id}/delete', 'DokterController@delete');
 Route::get('/dokter/{id}/edit', 'DokterController@edit');
 Route::post('/dokter/{id}/update', 'DokterController@update');
+
 
 // ==============================================================================
 // ======================== ALL ROUTE FOR REFERENSI PAGE ========================
@@ -86,6 +100,7 @@ Route::get('/referensi/kriteria/{id}/delete', 'KriteriaController@delete_kriteri
 // ==============================================================================
 Route::get('/register', 'RegistrationController@create');
 Route::post('/register', 'RegistrationController@store');
+
 
 // ==============================================================================
 // ========================= ALL ROUTE FOR LOGIN PAGE ===========================

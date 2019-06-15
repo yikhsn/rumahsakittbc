@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Pasien;
 use App\Models\Rumahsakit;
 use App\Models\Dokter;
+use App\Models\User;
+
 
 class AppController extends Controller
 {

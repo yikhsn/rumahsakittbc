@@ -15,6 +15,12 @@ use App\Models\Kecamatan;
 
 class PasienBaruController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function new_pasien_id(Request $request)
     {
         $provinsis = Provinsi::all();

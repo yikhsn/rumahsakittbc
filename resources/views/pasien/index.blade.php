@@ -106,32 +106,39 @@
                     <div class="modal-body">
                         <br>
                         <center>
-                        <i class="mdi mdi-printer" style="font-size: 50px;"></i>
-                        <br>
-                        <br>
-                        <h5 style="font-family: segoe ui light;">Cetak Tabel</h5>
+                            <i class="mdi mdi-printer" style="font-size: 50px;"></i>
+                            <br>
+                            <br>
+                            <h5 style="font-family: segoe ui light;">Cetak Tabel</h5>
                         </center>
                         <hr>
-                        <form class="form" role="form">
+                        
+                        <form class="form" role="form" method="post" action="/pasien/cetak">
+
+                            {{ csrf_field() }}
+
                             <div class="form-group">
-                                <label>Dari Tanggal</label>
+                                <label for="dari_tanggal">Dari Tanggal</label>
                                 <div class="col-md-12">
-                                    <input type="date" class="form-control">
+                                    <input name="dari_tanggal" id="dari_tanggal" type="date" class="form-control">
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                <label>Hingga Tanggal</label>
+                                <label for="sampai_tanggal">Hingga Tanggal</label>
                                 <div class="col-md-12">
-                                    <input type="date" class="form-control">
+                                    <input id="sampai_tanggal" name="sampai_tanggal" type="date" class="form-control">
                                 </div>
                             </div>
+
                             <center>
-                            <button  type="button" class="btn btn-danger btn-rounded">Cetak <i class="mdi mdi-printer"></i></button>
+                                <button  type="submit" class="btn btn-danger btn-rounded">Cetak <i class="mdi mdi-printer"></i></button>
                             </center>
                             <hr>
+
                             <label for=""> Cetak Semua Data</label>
                             <center>
-                            <button  type="button" class="btn btn-info btn-rounded">Cetak Semua Data <i class="mdi mdi-printer"></i></button>
+                                <button  type="button" class="btn btn-info btn-rounded">Cetak Semua Data <i class="mdi mdi-printer"></i></button>
                             </center>
                         </form>               
                     </div>

@@ -9,6 +9,10 @@ use App\Models\Type;
 
 class KriteriaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     public function referensi_kriteria()
     {

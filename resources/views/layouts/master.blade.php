@@ -143,7 +143,7 @@
                                                 <i class="mdi mdi-account-card-details" style="font-size:50px;">
                                                 </i>
                                                 <br>
-                                                <a href="daftar-user.php" style="color:#808080"> Daftar Akun</a>
+                                                <a href="/daftar-user" style="color:#808080"> Daftar Akun</a>
                                                 </center>
                                             </div>
                                         </div>
