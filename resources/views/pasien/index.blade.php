@@ -27,7 +27,7 @@
                     <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th style="font-family: segoe ui light; font-size:12px; text-align: center;">ID</th>
+                                <th style="font-family: segoe ui light; font-size:12px; text-align: center;">No</th>
                                 <th style="font-family: segoe ui light; font-size:12px; text-align: center;">NIK</th>
                                 <th style="font-family: segoe ui light; font-size:12px; text-align: center;">Nama</th>
                                 <th style="font-family: segoe ui light; font-size:12px; text-align: center;">Tanggal Pendaftaran</th>

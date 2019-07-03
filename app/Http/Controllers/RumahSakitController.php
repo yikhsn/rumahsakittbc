@@ -21,7 +21,7 @@ class RumahSakitController extends Controller
             'kecamatan.kabupaten.provinsi',
             'dokters',
             'pasiens',
-        ])->paginate(15);
+        ])->orderBy('id', 'desc')->paginate(15);
 
         $data = json_decode($rumahsakits->toJSON());
         $number = ($data->current_page - 1) * 15;

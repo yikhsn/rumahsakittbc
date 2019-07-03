@@ -20747,39 +20747,56 @@ function () {
   return function controlRumahsakitSelect() {
     return _ref7.apply(this, arguments);
   };
-}(); // elements.searchBoxDokter.addEventListener('keyup', () => {
-//     console.log('search dokter is typed');
-//     controlSearchDokter();
-// });
-// elements.searchBoxPasien.addEventListener('keyup', () => {
-//     console.log('search pasien is typed');
-//     controlSearchPasien();
-// });
-// elements.searchBoxRumahSakit.addEventListener('keyup', () => {
-//     console.log('search rumah sakit is typed');
-//     controlSearchRumahSakit();
-// });
-// elements.provinsiSelect.addEventListener('change', () => {
-//     console.log('provinsi is selected');
-//     controlProvinsiSelect();
-// });
-// elements.kabupatenSelect.addEventListener('change', () => {
-//     console.log('kabupaten is selected');
-//     controlKabupatenSelect();
-// });
-// elements.kecamatanSelect.addEventListener('change', () => {
-//     console.log('kecamatan is selected');
-// });
-// elements.jenisSelect.addEventListener('change', () => {
-//     console.log('jenis penyakits is selected');
-//     controlJenisSelect();
-// });
+}();
 
+if (_views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].searchBoxDokter) {
+  _views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].searchBoxDokter.addEventListener('keyup', function () {
+    console.log('search dokter is typed');
+    controlSearchDokter();
+  });
+}
 
-_views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].rumahsakitSelect.addEventListener('change', function () {
-  console.log('rumah sakit is selected');
-  controlRumahsakitSelect();
-});
+if (_views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].searchBoxPasien) {
+  _views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].searchBoxPasien.addEventListener('keyup', function () {
+    console.log('search pasien is typed');
+    controlSearchPasien();
+  });
+}
+
+if (_views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].searchBoxRumahSakit) {
+  _views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].searchBoxRumahSakit.addEventListener('keyup', function () {
+    console.log('search rumah sakit is typed');
+    controlSearchRumahSakit();
+  });
+}
+
+if (_views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].provinsiSelect) {
+  _views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].provinsiSelect.addEventListener('change', function () {
+    console.log('provinsi is selected');
+    controlProvinsiSelect();
+  });
+}
+
+if (_views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].kabupatenSelect) {
+  _views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].kabupatenSelect.addEventListener('change', function () {
+    console.log('kabupaten is selected');
+    controlKabupatenSelect();
+  });
+}
+
+if (_views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].jenisSelect) {
+  _views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].jenisSelect.addEventListener('change', function () {
+    console.log('jenis penyakits is selected');
+    controlJenisSelect();
+  });
+}
+
+if (_views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].rumahsakitSelect) {
+  _views_base__WEBPACK_IMPORTED_MODULE_1__["elements"].rumahsakitSelect.addEventListener('change', function () {
+    console.log('rumah sakit is selected');
+    controlRumahsakitSelect();
+  });
+}
 
 /***/ }),
 

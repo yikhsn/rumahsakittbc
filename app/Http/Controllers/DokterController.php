@@ -22,7 +22,7 @@ class DokterController extends Controller
             'kecamatan',
             'rumahsakit',
             'pasiens'
-        ])->paginate(15);
+        ])->orderBy('id', 'desc')->paginate(15);
 
         $data = json_decode($dokters->toJSON());
         $number = ($data->current_page - 1) * 15;

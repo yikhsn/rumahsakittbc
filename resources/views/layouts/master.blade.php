@@ -22,8 +22,11 @@
         <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" />
+
         <script src="{{ URL::asset('assets/js/modernizr.min.js') }}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        @yield('top_add_assets')
+            
     </head>
     <body>
 
@@ -80,7 +83,7 @@
 
                                 <!-- GRAFIKS  -->
                                 <li class="has-submenu">
-                                    <a href="grafik.php"> <span><i class="mdi mdi-trending-up"></i></span><span> Grafik </span> </a>
+                                    <a href="/grafik"> <span><i class="mdi mdi-trending-up"></i></span><span> Grafik </span> </a>
                                 </li>
 
                                 <!-- HALAMAN -->
@@ -291,5 +294,8 @@
         <script src="{{ URL::asset('assets/js/jquery.core.js') }}"></script>
         <script src="{{ URL::asset('assets/js/jquery.app.js') }}"></script>
         <script src="{{ URL::asset('js/app.js') }}"></script>
+    
+    @yield('bottom_add_assets')
+
     </body>
 </html>

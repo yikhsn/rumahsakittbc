@@ -35,7 +35,7 @@ class PasienController extends Controller
             'jenis_penyakit',
             'type',
             'evaluasi'
-        ])->paginate(15);
+        ])->orderBy('id', 'desc')->paginate(15);
 
         $data = json_decode($pasiens->toJSON());
         $number = ($data->current_page - 1) * 15;
@@ -200,6 +200,11 @@ class PasienController extends Controller
         // dd($pasiens);
 
         return view('pasien.cetak', compact('pasiens'));
+    }
+
+    public function jadwal($id)
+    {
+        return view('pasien.jadwal');
     }
 
 }

@@ -4,6 +4,7 @@
 // ============================== MAIN ROUTE ====================================
 // ==============================================================================
 Route::get('/', 'AppController@index');
+Route::get('/grafik', 'AppController@grafik');
 
 
 // ==============================================================================
@@ -69,6 +70,7 @@ Route::get('/pasien/{id}', 'PasienController@show');
 Route::get('/pasien/{id}/delete', 'PasienController@delete');
 Route::get('/pasien/{id}/edit', 'PasienController@edit');
 Route::post('/pasien/{id}/update', 'PasienController@update');
+Route::get('/pasien/{id}/jadwal', 'PasienController@jadwal');
 
 
 // ==============================================================================

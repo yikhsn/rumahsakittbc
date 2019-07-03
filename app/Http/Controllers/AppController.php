@@ -7,6 +7,8 @@ use App\Models\Pasien;
 use App\Models\Rumahsakit;
 use App\Models\Dokter;
 use App\Models\User;
+use App\Models\Provinsi;
+use App\Models\Kecamatan;
 
 
 class AppController extends Controller
@@ -18,11 +20,11 @@ class AppController extends Controller
     
     public function index()
     {
-        $pasiens = Pasien::take(10)->get();
+        $pasiens = Pasien::take(10)->orderBy('id', 'desc')->get();
 
-        $rumahsakits = Rumahsakit::take(10)->get();
+        $rumahsakits = Rumahsakit::take(10)->orderBy('id', 'desc')->get();
 
-        $dokters = Dokter::take(10)->get();
+        $dokters = Dokter::take(10)->orderBy('id', 'desc')->get();
 
         $jumlah_pasien_baru = Pasien::where('type_id', 1)->count();
 
@@ -47,5 +49,191 @@ class AppController extends Controller
                 'dokters_number',
             ]
         ));
+    }
+
+    public function grafik()
+    {
+
+        $jumlah_pasien = Pasien::all()->count();
+        $jumlah_pasien_baru = Pasien::where('type_id', 1)->count();
+        $jumlah_pasien_lama = Pasien::where('type_id', 2)->count();
+        $jumlah_pasien_perempuan = Pasien::where('jenis_kelamin', 'Perempuan')->count();
+        $jumlah_pasien_lelaki = Pasien::where('jenis_kelamin', 'Laki-laki')->count();
+
+        // BTA PLUS DATA
+        $jumlah_pasien_bta_plus = Pasien::where('jenis_penyakit_id', 1)->count();
+        $jumlah_pasien_bta_plus_perempuan = Pasien::where([
+            ['jenis_penyakit_id', '=', 1],
+            ['jenis_kelamin', '=', 'Perempuan'],
+        ])->count();
+        $jumlah_pasien_bta_plus_lelaki = Pasien::where([
+            ['jenis_penyakit_id', '=', 1],
+            ['jenis_kelamin', '=', 'Laki-laki'],
+        ])->count();
+        $jumlah_pasien_bta_plus_lelaki_persen = $jumlah_pasien_bta_plus_lelaki == 0 ? 0 : ($jumlah_pasien_bta_plus_lelaki / $jumlah_pasien_bta_plus) * 100;
+        $jumlah_pasien_bta_plus_perempuan_persen = $jumlah_pasien_bta_plus_perempuan == 0 ? 0 : ($jumlah_pasien_bta_plus_perempuan / $jumlah_pasien_bta_plus) * 100;
+
+
+        // BTA MINUS
+        $jumlah_pasien_bta_minus = Pasien::where('jenis_penyakit_id', 2)->count();
+        $jumlah_pasien_bta_minus_perempuan = Pasien::where([
+            ['jenis_penyakit_id', '=', 2],
+            ['jenis_kelamin', '=', 'Perempuan'],
+        ])->count();
+        $jumlah_pasien_bta_minus_lelaki = Pasien::where([
+            ['jenis_penyakit_id', '=', 2],
+            ['jenis_kelamin', '=', 'Laki-laki'],
+        ])->count();
+        $jumlah_pasien_bta_minus_lelaki_persen = $jumlah_pasien_bta_minus_lelaki == 0 ? 0 : ($jumlah_pasien_bta_minus_lelaki / $jumlah_pasien_bta_minus) * 100;
+        $jumlah_pasien_bta_minus_perempuan_persen = $jumlah_pasien_bta_minus_perempuan == 0 ? 0 : ($jumlah_pasien_bta_minus_perempuan / $jumlah_pasien_bta_minus) * 100;
+
+
+        // EKSTRA PARU
+        $jumlah_pasien_ekstra_paru = Pasien::where('jenis_penyakit_id', 3)->count();
+        $jumlah_pasien_ekstra_paru_perempuan = Pasien::where([
+            ['jenis_penyakit_id', '=', 3],
+            ['jenis_kelamin', '=', 'Perempuan'],
+        ])->count();
+        $jumlah_pasien_ekstra_paru_lelaki = Pasien::where([
+            ['jenis_penyakit_id', '=', 3],
+            ['jenis_kelamin', '=', 'Laki-laki'],
+        ])->count();
+        $jumlah_pasien_ekstra_paru_lelaki_persen = $jumlah_pasien_ekstra_paru_lelaki == 0 ? 0 : ($jumlah_pasien_ekstra_paru_lelaki / $jumlah_pasien_ekstra_paru) * 100;
+        $jumlah_pasien_ekstra_paru_perempuan_persen = $jumlah_pasien_ekstra_paru_perempuan == 0 ? 0 : ($jumlah_pasien_ekstra_paru_perempuan / $jumlah_pasien_ekstra_paru) * 100;
+        
+
+        // KAMBUH
+        $jumlah_pasien_kambuh = Pasien::where('jenis_penyakit_id', 4)->count();
+        $jumlah_pasien_kambuh_perempuan = Pasien::where([
+            ['jenis_penyakit_id', '=', 4],
+            ['jenis_kelamin', '=', 'Perempuan'],
+        ])->count();
+        $jumlah_pasien_kambuh_lelaki = Pasien::where([
+            ['jenis_penyakit_id', '=', 4],
+            ['jenis_kelamin', '=', 'Laki-laki'],
+        ])->count();
+        $jumlah_pasien_kambuh_lelaki_persen = $jumlah_pasien_kambuh_lelaki == 0 ? 0 : ($jumlah_pasien_kambuh_lelaki / $jumlah_pasien_kambuh) * 100;
+        $jumlah_pasien_kambuh_perempuan_persen = $jumlah_pasien_kambuh_perempuan == 0 ? 0 : ($jumlah_pasien_kambuh_perempuan / $jumlah_pasien_kambuh) * 100;
+
+        // DEFAULT
+        $jumlah_pasien_default = Pasien::where('jenis_penyakit_id', 5)->count();
+        $jumlah_pasien_default_perempuan = Pasien::where([
+            ['jenis_penyakit_id', '=', 5],
+            ['jenis_kelamin', '=', 'Perempuan'],
+        ])->count();
+        $jumlah_pasien_default_lelaki = Pasien::where([
+            ['jenis_penyakit_id', '=', 5],
+            ['jenis_kelamin', '=', 'Laki-laki'],
+        ])->count();
+        $jumlah_pasien_default_lelaki_persen = $jumlah_pasien_default_lelaki == 0 ? 0 : ($jumlah_pasien_default_lelaki / $jumlah_pasien_default) * 100;
+        $jumlah_pasien_default_perempuan_persen = $jumlah_pasien_default_perempuan == 0 ? 0 : ($jumlah_pasien_default_perempuan / $jumlah_pasien_default) * 100;
+
+        
+        // GAGAL
+        $jumlah_pasien_gagal = Pasien::where('jenis_penyakit_id', 6)->count();
+        $jumlah_pasien_gagal_perempuan = Pasien::where([
+            ['jenis_penyakit_id', '=', 6],
+            ['jenis_kelamin', '=', 'Perempuan'],
+        ])->count();
+        $jumlah_pasien_gagal_lelaki = Pasien::where([
+            ['jenis_penyakit_id', '=', 6],
+            ['jenis_kelamin', '=', 'Laki-laki'],
+        ])->count();
+        $jumlah_pasien_gagal_lelaki_persen = $jumlah_pasien_gagal_lelaki == 0 ? 0 : ($jumlah_pasien_gagal_lelaki / $jumlah_pasien_gagal) * 100;
+        $jumlah_pasien_gagal_perempuan_persen = $jumlah_pasien_gagal_perempuan == 0 ? 0 : ($jumlah_pasien_gagal_perempuan / $jumlah_pasien_gagal) * 100;
+
+
+        // LAIN_LAIN
+        $jumlah_pasien_lain = Pasien::where('jenis_penyakit_id', 7)->count();
+        $jumlah_pasien_lain_perempuan = Pasien::where([
+            ['jenis_penyakit_id', '=', 7],
+            ['jenis_kelamin', '=', 'Perempuan'],
+        ])->count();
+        $jumlah_pasien_lain_lelaki = Pasien::where([
+            ['jenis_penyakit_id', '=', 7],
+            ['jenis_kelamin', '=', 'Laki-laki'],
+        ])->count();
+        $jumlah_pasien_lain_lelaki_persen = $jumlah_pasien_lain_lelaki == 0 ? 0 : ($jumlah_pasien_lain_lelaki / $jumlah_pasien_lain) * 100;
+        $jumlah_pasien_lain_perempuan_persen = $jumlah_pasien_lain_perempuan == 0 ? 0 : ($jumlah_pasien_lain_perempuan / $jumlah_pasien_lain) * 100;
+
+        $pasiens = Pasien::with([
+            'kecamatan.kabupaten.provinsi',
+        ])->get();
+
+        $pasien_by_provinsi = $pasiens->groupBy('kecamatan.kabupaten.provinsi.name');
+        $pasien_by_kabupaten = $pasiens->groupBy('kecamatan.kabupaten.name');
+
+        // $pasien_by_kabupaten = array_multisort(array_map('count', $pasien_by_kabupaten->toArray()), SORT_DESC, $pasien_by_kabupaten->toArray());
+
+        $sorted_pasien_by_provinsi = array_map(function($data){
+            return array_keys($data);
+        }, $pasien_by_provinsi->toArray());
+
+        // dd(\gettype($pasien_by_provinsi));
+
+        $number_pasien_provinsi = 0;
+        $number_pasien_kabupaten = 0;
+
+        // dd($pasien_by_provinsi->toArray());
+
+        return view('grafik.index', compact([
+            'jumlah_pasien',
+
+            'jumlah_pasien_baru',
+            'jumlah_pasien_lama',
+
+            'jumlah_pasien_perempuan',
+            'jumlah_pasien_lelaki',
+
+            'jumlah_pasien_bta_plus',
+            'jumlah_pasien_bta_plus_lelaki',
+            'jumlah_pasien_bta_plus_perempuan',
+            'jumlah_pasien_bta_plus_lelaki_persen',
+            'jumlah_pasien_bta_plus_perempuan_persen',
+
+            'jumlah_pasien_bta_minus',
+            'jumlah_pasien_bta_minus_lelaki',
+            'jumlah_pasien_bta_minus_perempuan',
+            'jumlah_pasien_bta_minus_lelaki_persen',
+            'jumlah_pasien_bta_minus_perempuan_persen',
+
+            'jumlah_pasien_ekstra_paru',
+            'jumlah_pasien_ekstra_paru_lelaki',
+            'jumlah_pasien_ekstra_paru_perempuan',
+            'jumlah_pasien_ekstra_paru_lelaki_persen',
+            'jumlah_pasien_ekstra_paru_perempuan_persen',
+
+            'jumlah_pasien_kambuh',
+            'jumlah_pasien_kambuh_lelaki',
+            'jumlah_pasien_kambuh_perempuan',
+            'jumlah_pasien_kambuh_lelaki_persen',
+            'jumlah_pasien_kambuh_perempuan_persen',
+
+            'jumlah_pasien_default',
+            'jumlah_pasien_default_lelaki',
+            'jumlah_pasien_default_perempuan',
+            'jumlah_pasien_default_lelaki_persen',
+            'jumlah_pasien_default_perempuan_persen',
+
+            'jumlah_pasien_gagal',
+            'jumlah_pasien_gagal_lelaki',
+            'jumlah_pasien_gagal_perempuan',
+            'jumlah_pasien_gagal_lelaki_persen',
+            'jumlah_pasien_gagal_perempuan_persen',
+
+            'jumlah_pasien_lain',
+            'jumlah_pasien_lain_lelaki',
+            'jumlah_pasien_lain_perempuan',
+            'jumlah_pasien_lain_lelaki_persen',
+            'jumlah_pasien_lain_perempuan_persen',
+
+            'pasien_by_provinsi',
+            'pasien_by_kabupaten',
+
+            'number_pasien_provinsi',
+            'number_pasien_kabupaten',
+
+            'sorted_pasien_by_provinsi',
+        ]));
     }
 }

@@ -131,23 +131,6 @@
                             <div id="dashboard-line-chart" style="height: 225px;"></div>
                         </div>
                     </div>
-                    <!--  -->
-                    <div class="col-lg-6">
-                        <div class="p-20 m-b-20">
-                            <h5 class="m-t-0 font-14">Jenis Kelamin</h5>
-                            <div class="text-center">
-                                <ul class="list-inline chart-detail-list">
-                                    <li class="list-inline-item">
-                                        <p class="font-weight-bold"><i class="fa fa-circle m-r-10 text-success"></i>Pria</p>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <p class="font-weight-bold"><i class="fa fa-circle m-r-10 text-danger"></i>Wanita</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="dashboard-bar-stacked" style="height: 300px;"></div>
-                        </div>
-                    </div>
                 </div>
                 <!--  -->
                 <h4>Tabel Data</h4>

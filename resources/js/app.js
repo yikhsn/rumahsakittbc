@@ -163,49 +163,58 @@ const controlRumahsakitSelect = async () => {
     }
 }
 
-
-// elements.searchBoxDokter.addEventListener('keyup', () => {
-//     console.log('search dokter is typed');
+if(elements.searchBoxDokter){
+    elements.searchBoxDokter.addEventListener('keyup', () => {
+        console.log('search dokter is typed');
     
-//     controlSearchDokter();
-// });
+        controlSearchDokter();
+    });
+}
 
-// elements.searchBoxPasien.addEventListener('keyup', () => {
-//     console.log('search pasien is typed');
+if(elements.searchBoxPasien){
+    elements.searchBoxPasien.addEventListener('keyup', () => {
+        console.log('search pasien is typed');
+        
+        controlSearchPasien();
+    });
+}
 
-//     controlSearchPasien();
-// });
+if(elements.searchBoxRumahSakit){
+    elements.searchBoxRumahSakit.addEventListener('keyup', () => {
+        console.log('search rumah sakit is typed');
+        
+        controlSearchRumahSakit();
+    });
+}
 
-// elements.searchBoxRumahSakit.addEventListener('keyup', () => {
-//     console.log('search rumah sakit is typed');
+if(elements.provinsiSelect){
+    elements.provinsiSelect.addEventListener('change', () => {
+        console.log('provinsi is selected');
+    
+        controlProvinsiSelect();
+    });
+}
 
-//     controlSearchRumahSakit();
-// });
+if(elements.kabupatenSelect){
+    elements.kabupatenSelect.addEventListener('change', () => {
+        console.log('kabupaten is selected');
+        
+        controlKabupatenSelect();
+    });
+}
 
-// elements.provinsiSelect.addEventListener('change', () => {
-//     console.log('provinsi is selected');
+if(elements.jenisSelect){
+    elements.jenisSelect.addEventListener('change', () => {
+        console.log('jenis penyakits is selected');
+        
+        controlJenisSelect();
+    });
+}
 
-//     controlProvinsiSelect();
-// });
-
-// elements.kabupatenSelect.addEventListener('change', () => {
-//     console.log('kabupaten is selected');
-
-//     controlKabupatenSelect();
-// });
-
-// elements.kecamatanSelect.addEventListener('change', () => {
-//     console.log('kecamatan is selected');
-// });
-
-// elements.jenisSelect.addEventListener('change', () => {
-//     console.log('jenis penyakits is selected');
-
-//     controlJenisSelect();
-// });
-
-elements.rumahsakitSelect.addEventListener('change', () => {
-    console.log('rumah sakit is selected');
-
-    controlRumahsakitSelect();
-});
+if(elements.rumahsakitSelect){
+    elements.rumahsakitSelect.addEventListener('change', () => {
+        console.log('rumah sakit is selected');
+        
+        controlRumahsakitSelect();
+    });
+}
