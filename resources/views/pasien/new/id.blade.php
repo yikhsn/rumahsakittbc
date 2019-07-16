@@ -9,12 +9,28 @@
             <div class="container-fluid">
                 <h2 style="font-family: segoe ui light;">Daftar Pasien Baru</h2>
                 <br>
+
+                @if ($errors->any())
+                    <div class="row">
+                        <div class ="col-sm-11">
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="row">
                     <div class ="col-sm-11">
                         <div class="panel panel-color panel-success" style="border-color: #a2a2a2;">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Langkah 1 : Idenditas Pasien</h3>
                             </div>
+
                             <div class="panel-body">
                                 
                                 <form class="form-horizontal" role="form" method="post" action="/pasien/new/store">

@@ -71,6 +71,7 @@ Route::get('/pasien/{id}/delete', 'PasienController@delete');
 Route::get('/pasien/{id}/edit', 'PasienController@edit');
 Route::post('/pasien/{id}/update', 'PasienController@update');
 Route::get('/pasien/{id}/jadwal', 'PasienController@jadwal');
+Route::post('/pasien/{id}/jadwal_store', 'PasienController@jadwal_store');
 
 
 // ==============================================================================

@@ -50,7 +50,7 @@ class PasienBaruController extends Controller
             'tempat_lahir'      => 'required',
             'jenis_kelamin'     => 'required',
             'tanggal_lahir'     => 'required',
-            'email'             => 'required',
+            'email'             => 'required | email',
             'password'          => 'required',
             'agama'             => 'required',
             'nik'               => 'required',

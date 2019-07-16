@@ -74,4 +74,9 @@ class Pasien extends Model
     {
         return $this->belongsTo('App\Models\Evaluasi');
     }
+
+    public function jadwal_pasiens()
+    {
+        return $this->hasMany('App\Models\JadwalPasien');
+    }
 }

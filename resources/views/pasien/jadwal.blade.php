@@ -64,11 +64,6 @@
               <br>
               <center>
                 <h3>Jadwal Pengobatan</h3>
-                <hr>
-                <img src="http://digitalimagemakerworld.com/images/profile-pictures/37318255-profile-pictures.jpg" class="rounded-circle" alt="Cinque Terre" style="width: 50%;">
-                <!-- Nama Pasien -->
-                <br>
-                <a href="info-pasien.php"><h5>Nama Pasien</h5></a>
               </center>
 
               <!-- Statistik Pasien -->
@@ -77,6 +72,11 @@
 
                 <div class="list-group has-actions">
                   <!-- Statistik Pengambilan Obat -->
+                  <div class="list-group-item">
+                      <span class="list-text">Nama Pasien</span>
+                      <span class="item-right"><b>Yaumil Ikhsan</b></span>
+                  </div>
+
                   <div class="list-group-item">
                       <span class="list-text">Tipe Pasien</span>
                       <span class="item-right"><b>Pasien Baru</b></span>
@@ -149,28 +149,6 @@
                   </div>
                 </div>
               </section>
-              <section class="page-aside-section">
-                <h5 class="page-aside-title">EVENTS</h5>
-                <div class="list-group calendar-list">
-                  <a class="list-group-item calendar-event" data-title="Meeting" data-stick=true
-                    data-color="red-600" href="javascript:void(0)">
-                    <i class="md-circle red-600 mr-10" aria-hidden="true"></i>Meeting
-                  </a>
-                  <a class="list-group-item calendar-event" data-title="Birthday Party" data-stick=true
-                    data-color="green-600" href="javascript:void(0)">
-                    <i class="md-circle green-600 mr-10" aria-hidden="true"></i>Birthday Party
-                  </a>
-                  <a class="list-group-item calendar-event" data-title="Call Jimba" data-stick=true
-                    data-color="orange-600" href="javascript:void(0)">
-                    <i class="md-circle orange-600 mr-10" aria-hidden="true"></i>Call Jimba
-                  </a>
-                  <a class="list-group-item calendar-event" data-title="Dinner with Team" data-stick=true
-                    data-color="cyan-600" href="javascript:void(0)">
-                    <i class="md-circle cyan-600 mr-10" aria-hidden="true"></i>Dinner with Team
-                  </a>
-                  <a id="addNewEventBtn" class="list-group-item" href="javascript:void(0)"> <i class="icon md-plus" aria-hidden="true"></i> Add New Event </a>
-                </div>
-              </section>
             </div>
           </div>
         </div>
@@ -184,18 +162,14 @@
             
           </div>
 
-
-
-
-
-
-
-
           <!--AddEvent Dialog -->
           <div class="modal fade" id="addNewEvent" aria-hidden="true" aria-labelledby="addNewEvent"
             role="dialog" tabindex="-1">
             <div class="modal-dialog modal-simple">
-              <form class="modal-content form-horizontal" action="#" method="post" role="form">
+              <form class="modal-content form-horizontal" action="/pasien/{{$id}}/jadwal_store" method="post" role="form">
+
+                {{ csrf_field() }}
+
                 <div class="modal-header">
                   <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
                   <h4 class="modal-title">Agenda Baru</h4>
@@ -204,22 +178,21 @@
 
                   <!-- Judul Agenda -->
                   <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="ename">Tipe :</label>
+                    <label class="col-md-2 form-control-label" for="nama_jadwal">Tipe :</label>
                     <div class="col-md-10">
-                      <select name="" id="" class="form-control">
+                      <select name="nama_jadwal" id="nama_jadwal" class="form-control">
                         <option value="Pengambilan Obat">Pengambilan Obat</option>
-                        <option value="Konsultasi Do8kjkkter">Konsultasi DOkter</option>
+                        <option value="Konsultasi Dokter">Konsultasi Dokter</option>
                       </select>
                     </div>
                   </div>
 
                   <!-- Akhir Agenda -->
                   <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="starts">Mulai:</label>
+                    <label class="col-md-2 form-control-label" for="start_at">Mulai:</label>
                     <div class="col-md-10">
                       <div class="input-group">
-                        <input type="text" class="form-control" id="starts" data-container="#addNewEvent"
-                          data-plugin="datepicker">
+                        <input type="date" class="form-control" name="start_at" id="start_at" data-container="#addNewEvent">
                         <span class="input-group-addon">
                           <i class="icon md-calendar" aria-hidden="true"></i>
                         </span>
@@ -227,14 +200,12 @@
                     </div>
                   </div>
 
-
                   <!-- Akhir Agenda -->
                   <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="ends">Akhir:</label>
+                    <label class="col-md-2 form-control-label" for="end_at">Akhir:</label>
                     <div class="col-md-10">
                       <div class="input-group">
-                        <input type="text" class="form-control" id="ends" data-container="#addNewEvent"
-                          data-plugin="datepicker">
+                        <input type="date" class="form-control" name="end_at" id="end_at" data-container="#addNewEvent">
                         <span class="input-group-addon">
                           <i class="icon md-calendar" aria-hidden="true"></i>
                         </span>
@@ -243,11 +214,13 @@
                   </div>
                 </div>
 
+                <input type="hidden" value="{{ $id }}"
+                    name="pasien_id" id="pasien_id" required>
 
                 <!-- Button -->
                 <div class="modal-footer">
                   <div class="form-actions">
-                    <button class="btn btn-primary" data-dismiss="modal" type="button">Add this event</button>
+                    <button class="btn btn-primary" type="submit">Tambah</button>
                     <a class="btn btn-sm btn-white btn-pure" data-dismiss="modal" href="javascript:void(0)">Cancel</a>
                   </div>
                 </div>
@@ -255,12 +228,6 @@
             </div>
           </div>
           <!-- End AddEvent Dialog -->
-
-
-
-
-
-
 
           <!-- Edit Dialog -->
           <div class="modal fade" id="editNewEvent" aria-hidden="true" aria-labelledby="editNewEvent"
@@ -497,13 +464,13 @@
     <script src="{{ URL::asset('assets/global/vendor/intro-js/intro.js') }}"></script>
     <script src="{{ URL::asset('assets/global/vendor/screenfull/screenfull.js') }}"></script>
     <script src="{{ URL::asset('assets/global/vendor/slidepanel/jquery-slidePanel.js') }}"></script>
-        <script src="{{ URL::asset('assets/global/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/global/vendor/moment/moment.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/global/vendor/fullcalendar/fullcalendar.js') }}"></script>
-        <script src="{{ URL::asset('assets/global/vendor/jquery-selective/jquery-selective.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/global/vendor/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
-        <script src="{{ URL::asset('assets/global/vendor/bootstrap-touchspin/bootstrap-touchspin.min.js') }}"></script>
-        <script src="{{ URL::asset('assets/global/vendor/bootbox/bootbox.js') }}"></script>
+    <script src="{{ URL::asset('assets/global/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/global/vendor/moment/moment.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/global/vendor/fullcalendar/fullcalendar.js') }}"></script>
+    <script src="{{ URL::asset('assets/global/vendor/jquery-selective/jquery-selective.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/global/vendor/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ URL::asset('assets/global/vendor/bootstrap-touchspin/bootstrap-touchspin.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/global/vendor/bootbox/bootbox.js') }}"></script>
     
     <!-- Scripts -->
     <script src="{{ URL::asset('assets/global/js/Component.js') }}"></script>

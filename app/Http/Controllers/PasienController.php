@@ -12,6 +12,7 @@ use App\Models\Rumahsakit;
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
+use App\Models\JadwalPasien;
 use DateTime;
 use DB;
 
@@ -204,7 +205,24 @@ class PasienController extends Controller
 
     public function jadwal($id)
     {
-        return view('pasien.jadwal');
+        $jadwal_pasien = JadwalPasien::where('pasien_id', $id)->get();
+
+        return view('pasien.jadwal', compact([
+            'id',
+            'jadwal_pasien'
+        ]));
+    }
+
+    public function jadwal_store($id)
+    {
+        JadwalPasien::create([
+            'nama_jadwal'       => request('nama_jadwal'),
+            'start_at'          => request('start_at'),
+            'end_at'            => request('end_at'),
+            'pasien_id'         => request('pasien_id'),
+        ]);
+
+        return redirect('/pasien/' . $id . '/jadwal');
     }
 
 }
