@@ -9,6 +9,21 @@
             <div class="container-fluid">
                 <h2 style="font-family: segoe ui light;">Tambah Dokter</h2>
                 <br>
+
+                @if ($errors->any())
+                    <div class="row">
+                        <div class ="col-sm-11">
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="row">
                     <div class ="col-sm-11">
                         <div class="panel panel-color panel-primary" style="border-color: #a2a2a2;">
@@ -31,14 +46,14 @@
                                     <div class="form-group">
                                         <label for="nik">NIK</label>
                                         <div class="col-md-11">
-                                            <input type="text" class="form-control" placeholder="NIK Dokter" id="nik" name="nik" required>
+                                            <input type="number" class="form-control" placeholder="NIK Dokter" id="nik" name="nik" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="usia">Usia</label>
                                         <div class="col-md-11">
-                                            <input type="text" class="form-control" placeholder="Usia Dokter" id="usia" name="usia" required>
+                                            <input type="number" class="form-control" placeholder="Usia Dokter" id="usia" name="usia" required>
                                         </div>
                                     </div>
 
@@ -60,7 +75,7 @@
                                     <div class="form-group">
                                         <label for="no_telepon">Nomor Telepon Dokter</label>
                                         <div class="col-md-11">
-                                            <input type="text" class="form-control" placeholder="Nomor Telepon" id="no_telepon" name="no_telepon" required>
+                                            <input type="number" class="form-control" placeholder="Nomor Telepon" id="no_telepon" name="no_telepon" required>
                                         </div>
                                     </div>
 

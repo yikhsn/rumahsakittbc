@@ -12,6 +12,7 @@ use App\Models\Rumahsakit;
 use App\Models\Provinsi;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
+use App\Models\JadwalPasien;
 
 class PasienBaruController extends Controller
 {
@@ -46,18 +47,18 @@ class PasienBaruController extends Controller
     public function new_pasien_id_store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama'              => 'required',
-            'tempat_lahir'      => 'required',
-            'jenis_kelamin'     => 'required',
+            'nama'              => 'required | max:255',
+            'tempat_lahir'      => 'required | max:255',
+            'jenis_kelamin'     => 'required | max:255',
             'tanggal_lahir'     => 'required',
-            'email'             => 'required | email',
-            'password'          => 'required',
+            'email'             => 'required | email | unique:pasiens',
+            'password'          => 'required | min:6 | max:255',
             'agama'             => 'required',
-            'nik'               => 'required',
+            'nik'               => 'required | integer',
             'no_telepon'        => 'required',
-            'alamat'            => 'required',
-            'kecamatan_id'      => 'required',
-            'type_id'           => 'required',
+            'alamat'            => 'required | min:20',
+            'kecamatan_id'      => 'required | integer',
+            'type_id'           => 'required | integer',
         ]);
 
         if(empty($request->session()->get('pasien'))){
@@ -77,16 +78,19 @@ class PasienBaruController extends Controller
     public function new_pasien_riwayat(Request $request)
     {
         $pasien = $request->session()->get('pasien');
+
+        // dd($pasien->id);
+
         return view('pasien.new.riwayat', compact('pasien'));
     }
 
     public function new_pasien_riwayat_store(Request $request)
     {
         $validatedData = $request->validate([
-            'hasil_sputum'          => 'required',
-            'jumlah_sputum'         => 'required',
+            'hasil_sputum'          => 'required ',
+            'jumlah_sputum'         => 'required | integer',
             'pengobatan_satu_bulan' => 'required',
-            'catatan_kesehatan'     => 'nullable',
+            'catatan_kesehatan'     => 'nullable | max:255',
         ]);
 
         $pasien = $request->session()->get('pasien');
@@ -119,10 +123,10 @@ class PasienBaruController extends Controller
     public function new_pasien_kriteria_store(Request $request)
     {
         $validatedData = $request->validate([
-            'jenis_penyakit_id'     => 'required',
-            'evaluasi_id'           => 'required',
-            'rumahsakit_id'        => 'required',
-            'dokter_id'             => 'required',
+            'jenis_penyakit_id'         => 'required | integer',
+            'evaluasi_id'               => 'required | integer',
+            'rumahsakit_id'             => 'required | integer',
+            'dokter_id'                 => 'required | integer',
         ]);
 
         $pasien = $request->session()->get('pasien');
@@ -158,15 +162,15 @@ class PasienBaruController extends Controller
     public function new_pasien_pendamping_store(Request $request)
     {
         $validatedDataPendamping = $request->validate([
-            'nama'              => 'required',
-            'nik'               => 'required',
-            'usia'              => 'required',
+            'nama'              => 'required | max:255',
+            'nik'               => 'required | max:20 | unique:pendampings', 
+            'usia'              => 'required | max:11', 
             'hubungan_pasien'   => 'required',
             'jenis_kelamin'     => 'required',
             'agama'             => 'required',
             'no_telepon'        => 'required',
-            'kecamatan_id'      => 'required',
-            'alamat'            => 'required',
+            'kecamatan_id'      => 'required | integer',
+            'alamat'            => 'required | min:20 | max:255',
         ]);
 
         if(empty($request->session()->get('pendamping'))){
@@ -196,7 +200,8 @@ class PasienBaruController extends Controller
         $pasien = $request->session()->get('pasien');
         $pendamping = $request->session()->get('pendamping');
 
-        // dd($pendamping);
+
+        // dd($date);
 
         return view('pasien.new.finish', compact(
             [
@@ -214,7 +219,20 @@ class PasienBaruController extends Controller
         $pendamping->save();
         $pasien->save();
 
+        $date = new \DateTime();
+                
+        for ($x = 1; $x <= 5; $x++) {
+            
+            $date->add(new \DateInterval('P30D'));
+
+            JadwalPasien::create([
+                'nama_jadwal'       => 'Pengambilan Obat',
+                'start_at'          => $date,
+                'end_at'            => $date,
+                'pasien_id'         => $pasien->id,
+            ]);
+        }
+
         return redirect('/pasien');
     }
-
 }

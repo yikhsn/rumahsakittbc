@@ -63,18 +63,22 @@ class DokterController extends Controller
         ]));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        Dokter::create([
-            'nama'              => request('nama'),
-            'usia'              => request('usia'),
-            'agama'             => request('agama'),
-            'nik'               => request('nik'),
-            'no_telepon'        => request('no_telepon'),
-            'alamat'            => request('alamat'),
-            'kecamatan_id'      => request('kecamatan_id'),
-            'rumahsakit_id'     => request('rumahsakit_id')
+        $validatedDataDokter = $request->validate([
+            'nama'              => 'required | max:255',
+            'usia'              => 'required | max:11',
+            'agama'             => 'required',
+            'nik'               => 'required | max:20', 
+            'no_telepon'        => 'required',
+            'alamat'            => 'required | min:20 | max:255',
+            'kecamatan_id'      => 'required | integer',
+            'rumahsakit_id'      => 'required | integer',
         ]);
+
+        $dokter = new Dokter();
+        $dokter->fill($validatedDataDokter);
+        $dokter->save();
 
         return redirect('/dokter');
     }

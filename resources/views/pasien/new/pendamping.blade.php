@@ -9,6 +9,21 @@
             <div class="container-fluid">
                 <h2 style="font-family: segoe ui light;">Daftar Pasien Baru</h2>
                 <br>
+
+                @if ($errors->any())
+                    <div class="row">
+                        <div class ="col-sm-11">
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="row">
                     <div class ="col-sm-11">
                         <div class="panel panel-color panel-primary" style="border-color: #a2a2a2;">
@@ -34,7 +49,7 @@
                                     <div class="form-group">
                                         <label for="nik">NIK Pendamping</label>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control"
+                                            <input type="number" class="form-control"
                                                 value="{{ (isset( $pendamping->nik )) ? $pendamping->nik : '' }}"
                                                 placeholder="NIK Pendamping" 
                                                 name="nik" id="nik" required>
@@ -44,7 +59,7 @@
                                     <div class="form-group">
                                         <label for="usia">Usia Pendamping</label>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" 
+                                            <input type="number" class="form-control" 
                                                 value="{{ (isset( $pendamping->usia )) ? $pendamping->usia : '' }}"
                                                 placeholder="Usia Pendamping" 
                                                 name="usia" id="usia" required>

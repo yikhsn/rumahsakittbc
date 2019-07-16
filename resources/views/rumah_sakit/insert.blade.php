@@ -10,6 +10,21 @@
                 <div class="container-fluid">
                     <h2 style="font-family: segoe ui light;">Tambah Rumah Sakit Baru</h2>
                     <br>
+
+                    @if ($errors->any())
+                        <div class="row">
+                            <div class ="col-sm-11">
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="row">
                         <div class ="col-sm-11">
                             <div class="panel panel-color panel-success" style="border-color: #a2a2a2;">

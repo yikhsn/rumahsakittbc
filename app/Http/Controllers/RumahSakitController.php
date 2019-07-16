@@ -64,15 +64,19 @@ class RumahSakitController extends Controller
         ]));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        Rumahsakit::create([
-            'no_rumahsakit'         =>    request('no_rumahsakit'),
-            'nama'                  =>    request('nama'),
-            'no_telepon'            =>    request('no_telepon'),
-            'alamat'                =>    request('alamat'),
-            'kecamatan_id'          =>    request('kecamatan_id')
+        $validatedDataRS = $request->validate([
+            'nama'              => 'required | max:255',
+            'no_rumahsakit'     => 'required | max:255', 
+            'no_telepon'        => 'required',
+            'kecamatan_id'      => 'required | integer',
+            'alamat'            => 'required | min:20 | max:255',
         ]);
+
+        $rumahsakit = new Rumahsakit();
+        $rumahsakit->fill($validatedDataRS);
+        $rumahsakit->save();
 
         return redirect('/rumahsakit');
     }

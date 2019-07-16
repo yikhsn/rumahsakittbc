@@ -10,6 +10,20 @@
                 <h2 style="font-family: segoe ui light;">Daftar Pasien Baru</h2>
                 <br>
 
+                @if ($errors->any())
+                    <div class="row">
+                        <div class ="col-sm-11">
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <div clas="container">
                     <div  class="row">
                         <div class="col-lg-11">
