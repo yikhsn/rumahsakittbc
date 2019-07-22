@@ -8,8 +8,9 @@ class JadwalPasien extends Model
 {
     protected $fillable = [
         'nama_jadwal',
-        'start_at',
-        'end_at',
+        'start',
+        'end',
+        'color',
         'is_done',
         'is_failed',
         'pasien_id'

@@ -206,20 +206,25 @@ class PasienController extends Controller
     public function jadwal($id)
     {
         $jadwal_pasien = JadwalPasien::where('pasien_id', $id)->get();
+        $pasien = Pasien::find($id);
+
+        // dd($jadwal_pasien);
 
         return view('pasien.jadwal', compact([
             'id',
-            'jadwal_pasien'
+            'jadwal_pasien',
+            'pasien'
         ]));
     }
 
     public function jadwal_store($id)
     {
         JadwalPasien::create([
-            'nama_jadwal'       => request('nama_jadwal'),
-            'start_at'          => request('start_at'),
-            'end_at'            => request('end_at'),
-            'pasien_id'         => request('pasien_id'),
+            'nama_jadwal'           => request('nama_jadwal'),
+            'start'                 => request('start'),
+            'end'                   => request('end'),
+            'color'                 => request('color'),
+            'pasien_id'             => request('pasien_id'),
         ]);
 
         return redirect('/pasien/' . $id . '/jadwal');

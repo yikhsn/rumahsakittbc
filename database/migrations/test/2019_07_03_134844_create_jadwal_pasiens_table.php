@@ -17,8 +17,9 @@ class CreateJadwalPasiensTable extends Migration
             $table->engine = 'InnoDB';            
             $table->increments('id');
             $table->string('nama_jadwal');
-            $table->date('start_at');
-            $table->date('end_at');
+            $table->string('color', 7)->nullable();
+            $table->date('start');
+            $table->date('end');
             $table->integer('is_done')->nullable();
             $table->integer('is_failed')->nullable();
             $table->unsignedInteger('pasien_id');

@@ -115,22 +115,43 @@
                             <h3 style="  font-family: segoe ui light; font-size: 35px;" class="m-b-20 mt-3" ><span>{{ $jumlah_rumah_sakit }}</span></h3>                            
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="card-box" style="width: 800px; border-color:#cacaca;">
-                            <h6 class="m-t-0">Jumlah Pasien</h6>
-                            <div class="text-center">
-                                <ul class="list-inline chart-detail-list">
-                                    <li class="list-inline-item">
-                                        <p class="font-weight-bold"><i class="fa fa-circle m-r-10 text-primary"></i>Pasien Baru</p>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <p class="font-weight-bold"><i class="fa fa-circle m-r-10 text-info"></i>Pasien Pengobatan Ulang</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="dashboard-line-chart" style="height: 225px;"></div>
+                    
+                    <div class="col-sm-8">
+                        <div class="card-box" style="border-color:#cacaca;">
+                            <h6 class="m-t-0">Jadwal Pasien</h6>
+                            <div class="table-responsive">
+                                <table class="table table-hover mails m-0 table table-actions-bar">
+                                    <thead>
+                                        <th style="font-size: 11px;">No</th>
+                                        <th style="font-size: 11px;">Nama</th>
+                                        <th style="font-size: 11px;">Tipe</th>
+                                        <th style="font-size: 11px;">Kriteria</th>
+                                        <th style="font-size: 11px;">Jadwal</th>
+                                        <th style="font-size: 11px;">Tanggal</th>
+                                        <th style="font-size: 11px;">Rumah Sakit</th>
+                                        <th style="font-size: 11px;">Dokter</th>
+                                        <th style="font-size: 11px;">Lihat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($jadwal_pasien_hari_ini as $jadwal)
+                                        <tr>
+                                            <td style="font-size: 12px;">{{ $jadwal_pasien_hari_ini_number++ }}</td>
+                                            <td style="font-size: 12px;">{{ $jadwal->pasien->nama}}</td>
+                                            <td style="font-size: 12px;">{{ $jadwal->pasien->type->type}}</td>
+                                            <td style="font-size: 12px;">{{ $jadwal->pasien->jenis_penyakit->nama}}</td>
+                                            <td style="font-size: 12px;">{{ $jadwal->nama_jadwal}}</td>
+                                            <td style="font-size: 12px;">{{ date('d-m-Y', strtotime($jadwal->start)) }}</td>
+                                            <td style="font-size: 12px;">{{ $jadwal->pasien->rumahsakit->nama}}</td>
+                                            <td style="font-size: 12px;">{{ $jadwal->pasien->dokter->nama}}</td>
+                                            <td style="font-size: 12px;"><a href="/pasien/{{$jadwal->pasien->id}}/jadwal" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
+                                        </tr>;
+                                    @endforeach                                    
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                    <!-- Akhir Penambahan Kode -->
                 </div>
                 <!--  -->
                 <h4>Tabel Data</h4>

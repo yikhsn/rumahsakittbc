@@ -153,7 +153,7 @@
                                 <br>
                                 <!-- Opsi -->
                                 <div class="text-left">
-                                    <a href="edit-pasien-baru.php" class="btn btn-warning">
+                                    <a href="/pasien/{{ $pasien->id }}/jadwal" class="btn btn-warning">
                                         <i class="fa fa-edit"></i>
                                         Lihat Jadwal
                                     </a> 

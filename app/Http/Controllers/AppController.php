@@ -9,7 +9,7 @@ use App\Models\Dokter;
 use App\Models\User;
 use App\Models\Provinsi;
 use App\Models\Kecamatan;
-
+use App\Models\JadwalPasien;
 
 class AppController extends Controller
 {
@@ -32,9 +32,12 @@ class AppController extends Controller
 
         $jumlah_rumah_sakit = Rumahsakit::get()->count();
 
+        $jadwal_pasien_hari_ini = JadwalPasien::take(5)->with('pasien')->where('start', strftime('%F'))->get();
+
         $pasiens_number = 0;
         $rumahsakits_number = 0;
         $dokters_number = 0;
+        $jadwal_pasien_hari_ini_number = 1;
 
         return view('welcome', compact(
             [
@@ -47,12 +50,51 @@ class AppController extends Controller
                 'pasiens_number',
                 'rumahsakits_number',
                 'dokters_number',
+                'jadwal_pasien_hari_ini',
+                'jadwal_pasien_hari_ini_number'
             ]
         ));
     }
 
     public function grafik()
     {
+        $pasiens_pengobatan_ulang = Pasien::where('type_id', 2)->take(10)->orderBy('id', 'desc')->get();
+        $pasiens_for_knn = Pasien::where('type_id', 2)->take(10)->orderBy('id', 'desc')->get();
+
+        foreach($pasiens_for_knn as $pasien){
+
+            // c1_knn
+            $jumlah_sputum = $pasien->jumlah_sputum;
+
+            // c2_knn
+            $hasil_sputum = $pasien->hasil_sputum ;
+            $nilai_hasil_sputum = 0;
+            if ($hasil_sputum == "Positif") $nilai_hasil_sputum = 1;
+            else $nilai_hasil_sputum = 2;
+
+            // c3_knn
+            $nilai_evaluasi = $pasien->evaluasi->id;
+
+            // hasil_knn
+            $hasil_knn = $pasien->nilai_sputum + $nilai_hasil_sputum + $nilai_evaluasi;
+
+            // nilai_knn
+            $d_1 = ($pasien->nilai_sputum+9);
+            $d_2 = ($nilai_hasil_sputum +9);
+            $d_3 = ($nilai_evaluasi + 9);
+            $d_hasil = $d_1 + $d_2 + $d_3;
+            $nilai_knn = sqrt($d_hasil);
+
+
+            Pasien::where('id', $pasien->id)
+            ->update([
+                'knn_c1'                                =>    $jumlah_sputum,
+                'knn_c2'                                =>    $nilai_hasil_sputum,
+                'knn_c3'                                =>    $nilai_evaluasi,
+                'jumlah_knn'                            =>    $hasil_knn,
+                'hasil_knn'                             =>    $nilai_knn,
+        ]);
+        }
 
         $jumlah_pasien = Pasien::all()->count();
         $jumlah_pasien_baru = Pasien::where('type_id', 1)->count();
@@ -173,10 +215,14 @@ class AppController extends Controller
 
         $number_pasien_provinsi = 0;
         $number_pasien_kabupaten = 0;
+        $number_pasien_knn = 1;
 
         // dd($pasien_by_provinsi->toArray());
 
         return view('grafik.index', compact([
+            // 'pasiens',
+            'pasiens_pengobatan_ulang',
+
             'jumlah_pasien',
 
             'jumlah_pasien_baru',
@@ -232,6 +278,7 @@ class AppController extends Controller
 
             'number_pasien_provinsi',
             'number_pasien_kabupaten',
+            'number_pasien_knn',
 
             'sorted_pasien_by_provinsi',
         ]));

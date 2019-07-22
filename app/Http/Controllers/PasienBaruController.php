@@ -230,6 +230,7 @@ class PasienBaruController extends Controller
                 'start_at'          => $date,
                 'end_at'            => $date,
                 'pasien_id'         => $pasien->id,
+                'color'             => '#FF0000'
             ]);
         }
 

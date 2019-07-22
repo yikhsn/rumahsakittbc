@@ -6,500 +6,425 @@
 
 
 @section('top_add_assets')
-    <link rel="apple-touch-icon" href="{{ URL::asset('assets/local/images/apple-touch-icon.png') }}">
-    <link rel="shortcut icon" href="{{ URL::asset('assets/local/images/favicon.ico') }}">
-    
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ URL::asset('assets/global/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/css/bootstrap-extend.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/local/css/site.min.css') }}">
     
-    <!-- Plugins -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/animsition/animsition.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/asscrollable/asScrollable.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/switchery/switchery.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/intro-js/introjs.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/slidepanel/slidePanel.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/flag-icon-css/flag-icon.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/waves/waves.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/fullcalendar/fullcalendar.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/bootstrap-datepicker/bootstrap-datepicker.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/bootstrap-touchspin/bootstrap-touchspin.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/vendor/jquery-selective/jquery-selective.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/local/examples/css/apps/calendar.css') }}">
-    
-    
-    <!-- Fonts -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/fonts/material-design/material-design.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/global/fonts/brand-icons/brand-icons.min.css') }}">
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
-    
-    
-    <!-- Scripts -->
-    <script src="{{ URL::asset('assets/global/vendor/breakpoints/breakpoints.js') }}"></script>
-    <script>
-      Breakpoints();
-    </script>
+    <link rel="stylesheet" href="{{ URL::asset('assets/full_baru/css/fullcalendar.css') }}">
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+
+
+    <!-- Custom CSS -->
+    <!-- <style>
+      @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Open+Sans+Condensed:300&display=swap');
+        </style> -->
+      <style>
+      body {
+      padding-top: 0px;
+      /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+      }
+        #calendar {
+          max-width: 100%;
+        }
+        .col-centered{
+          float: none;
+          margin: 0 auto;
+			}
+		</style>
+
+
 @endsection
 
 @section('content')
 
-<body class="animsition site-navbar-small app-calendar page-aside-left" style="padding-top: 0px;">
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->  
+    <br>
 
-    <div class="page">
-      <div class="page-aside">
-        <div class="page-aside-switch">
-          <i class="icon md-chevron-left" aria-hidden="true"></i>
-          <i class="icon md-chevron-right" aria-hidden="true"></i>
-        </div>
-        <div class="page-aside-inner page-aside-scroll">
-          <div data-role="container">
-            <div data-role="content">
+		<!-- Page Content -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="card">
+						<div class="card-header" style="background-color: white;">
+							<center>
+							<h4 style="font-family: nanum gothic;">Penjadwalan Pasien</h4>
+							</center>
+							
+						</div>
+						<div class="card-body">
+							<center>
+							<i class="fa fa-user" style="font-size: 100px;"></i>
+							<h6>{{ $pasien->nama }}</h6>
+							</center>
+							<table>
+								<tbody>
+									
+									<!-- Tipe Pasien -->
+									<tr>
+										<td style="width: 40%; font-size:15px">Tipe Pasien</td>
+										<!-- <td style="font-size:15px">: {{ $pasien->type->type  }} </td> -->
+										<td style="font-size:15px">: {{ $pasien->type->type  }} </td>
+									</tr>
+									<!-- Kategori Evaluasi Pasien -->
 
-              
-              <!-- Gambar Profil Pasien -->
-              <br>
-              <center>
-                <h3>Jadwal Pengobatan</h3>
-              </center>
+									<!-- Evaluasi Pasien -->
+									<tr>
+										<td style="width: 40%; font-size:15px">Evaluasi Pasien</td>
+										<td style="font-size:15px">: {{ $pasien->evaluasi->nama  }} </td>
+									</tr>
+									<!-- Tanggal Pendaftaran -->
+									<tr>
+										<td style="width: 40%; font-size:15px">Pendaftaran</td>
+										<td style="font-size:15px">: {{ date('d-m-Y', strtotime($pasien->created_at))  }} </td>
+									</tr>
+									<!-- Jumlah Sputum -->
+									<tr>
+										<td style="width: 40%; font-size:15px ">Jumlah Sputum</td>
+										<td style="font-size:15px">: {{ $pasien->jumlah_sputum  }} </td>
+									</tr>
 
-              <!-- Statistik Pasien -->
-              <section class="page-aside-section">
-                <h5 class="page-aside-title">Informasi</h5>
+                  <tr>
+										<td style="width: 40%; font-size:15px "> Sisa Pengobatan</td>
+										<td style="font-size:15px">: {{ $pasien->type->type  }} </td>
+									</tr>
+								</tbody>
+							</table>
+									
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8 ">
+					<div id="calendar" class="col-centered">
+					</div>
+				</div>
+				
+			</div>
+			<!-- /.row -->
+			
+			<!-- Modal -->
+			<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+            <form class="modal-content form-horizontal" action="/pasien/{{$id}}/jadwal_store" method="post" role="form">
+            {{ csrf_field() }}
+							
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Tambah Agenda</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<div class="modal-body">
+								
+								<div class="form-group">
+									<label for="title" class="col-sm-2 control-label">Agenda</label>
+									<div class="col-sm-10">
+                    <select name="nama_jadwal" id="nama_jadwal" class="form-control">
+											<option value="Pengambilan Obat">Pengambilan Obat</option>
+											<option value="Konsultasi Dokter">Konsultasi Dokter</option>
+										</select>
+										
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="color" class="col-sm-2 control-label">Color</label>
+									<div class="col-sm-10">
+										<select name="color" class="form-control" id="color">
+											<option value="">Choose</option>
+											<option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
+											<option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
+											<option style="color:#008000;" value="#008000">&#9724; Green</option>
+											<option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
+											<option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
+											<option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
+											<option style="color:#000;" value="#000">&#9724; Black</option>
+											
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="start" class="col-sm-3 control-label">Dari Tanggal</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="start" id="start" readonly>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="end" class="col-sm-4 control-label">Sampai Tanggal</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="end" id="end" readonly>
+									</div>
+								</div>
+								
+							</div>
 
-                <div class="list-group has-actions">
-                  <!-- Statistik Pengambilan Obat -->
-                  <div class="list-group-item">
-                      <span class="list-text">Nama Pasien</span>
-                      <span class="item-right"><b>Yaumil Ikhsan</b></span>
-                  </div>
-
-                  <div class="list-group-item">
-                      <span class="list-text">Tipe Pasien</span>
-                      <span class="item-right"><b>Pasien Baru</b></span>
-                  </div>
-
-                  <div class="list-group-item">
-                      <span class="list-text">Krireria</span>
-                      <span class="item-right"><b>BTA (-)</b></span>
-                  </div>
-
-                  <div class="list-group-item">
-                      <span class="list-text">Tanggal Pendaftaran</span>
-                      <span class="item-right" style="font-size: 12px;"><b>21/12/2004</b></span>
-                  </div>
-                  <div class="list-group-item">
-                      <span class="list-text">Akhir Pengobatan</span>
-                      <span class="item-right" style="font-size: 12px;"><b>21/06/2005</b></span>
-                  </div>
-
-                  <div class="list-group-item">
-                      <span class="list-text">Durasi Pengobatan</span>
-                      <span class="item-right" ><b>3 Bulan</b></span>
-                  </div>
-
-            
-              </section>
-
-
-              <!-- Statistik Pasien -->
-              <section class="page-aside-section">
-                <h5 class="page-aside-title">Statistik</h5>
-
-                <div class="list-group has-actions">
-                  <!-- Statistik Pengambilan Obat -->
-                  <div class="list-group-item">
-                      <span class="list-text">Pengambilan Obat</span>
-                      <span class="item-right"><b>5</b></span>
-                  </div>
-
-                  <div class="list-group-item">
-                      <span class="list-text">Konsultasi Dokter</span>
-                      <span class="item-right"><b>2</b></span>
-                  </div>
-                </div>
-              </section>
-
-
-              <!-- Opsi Pasien -->
-              <section class="page-aside-section">
-                <h5 class="page-aside-title">Opsi</h5>
-                <div class="list-group has-actions">
-
-                  <!-- Opsi Pasien -->
-                  <div class="list-group-item" data-plugin="editlist">
-                    <div class="list-content">
-                      <span class="list-text"><a href="#">Informasi Pasien</a></span>
-                    </div>
-                  </div>
-
-                  <div class="list-group-item" data-plugin="editlist">
-                    <div class="list-content">
-                      <span class="list-text"><a href="#">Informasi Dokter</a></span>
-                    </div>
-                  </div>
-
-                  <div class="list-group-item" data-plugin="editlist">
-                    <div class="list-content">
-                      <span class="list-text"><a href="#">Informasi Rumah Sakit</a></span>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Full calendar -->
-      <div class="page-main">
-        <div class="calendar-container">
-          <div id="calendar">
-            
-          </div>
-
-          <!--AddEvent Dialog -->
-          <div class="modal fade" id="addNewEvent" aria-hidden="true" aria-labelledby="addNewEvent"
-            role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-simple">
-              <form class="modal-content form-horizontal" action="/pasien/{{$id}}/jadwal_store" method="post" role="form">
-
-                {{ csrf_field() }}
-
-                <div class="modal-header">
-                  <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
-                  <h4 class="modal-title">Agenda Baru</h4>
-                </div>
-                <div class="modal-body">
-
-                  <!-- Judul Agenda -->
-                  <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="nama_jadwal">Tipe :</label>
-                    <div class="col-md-10">
-                      <select name="nama_jadwal" id="nama_jadwal" class="form-control">
-                        <option value="Pengambilan Obat">Pengambilan Obat</option>
-                        <option value="Konsultasi Dokter">Konsultasi Dokter</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <!-- Akhir Agenda -->
-                  <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="start_at">Mulai:</label>
-                    <div class="col-md-10">
-                      <div class="input-group">
-                        <input type="date" class="form-control" name="start_at" id="start_at" data-container="#addNewEvent">
-                        <span class="input-group-addon">
-                          <i class="icon md-calendar" aria-hidden="true"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Akhir Agenda -->
-                  <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="end_at">Akhir:</label>
-                    <div class="col-md-10">
-                      <div class="input-group">
-                        <input type="date" class="form-control" name="end_at" id="end_at" data-container="#addNewEvent">
-                        <span class="input-group-addon">
-                          <i class="icon md-calendar" aria-hidden="true"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <input type="hidden" value="{{ $id }}"
+              <input type="hidden" value="{{ $id }}"
                     name="pasien_id" id="pasien_id" required>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<!-- Modal -->
+			<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<form class="form-horizontal" method="POST" action="editEventTitle.php">
+							<div class="modal-header">
+								
+								<h4 class="modal-title" id="myModalLabel">Edit Event</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<div class="modal-body">
+								
+								<div class="form-group">
+									<label for="title" class="col-sm-2 control-label">Title</label>
+									<div class="col-sm-10">
+										<input type="text" name="title" class="form-control" id="title" placeholder="Title">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="color" class="col-sm-2 control-label">Color</label>
+									<div class="col-sm-10">
+										<select name="color" class="form-control" id="color">
+											<option value="">Choose</option>
+											<option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
+											<option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
+											<option style="color:#008000;" value="#008000">&#9724; Green</option>
+											<option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
+											<option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
+											<option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
+											<option style="color:#000;" value="#000">&#9724; Black</option>
+											
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<div class="checkbox">
+											<label class="text-danger"><input type="checkbox"  name="delete"> Hapus Agenda</label>
+										</div>
+									</div>
+								</div>
+								
+								<input type="hidden" name="id" class="form-control" id="id">
+								
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+								<button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                <!-- Button -->
-                <div class="modal-footer">
-                  <div class="form-actions">
-                    <button class="btn btn-primary" type="submit">Tambah</button>
-                    <a class="btn btn-sm btn-white btn-pure" data-dismiss="modal" href="javascript:void(0)">Cancel</a>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <!-- End AddEvent Dialog -->
+		<!-- /.container -->
+		<!-- jQuery Version 1.11.1 -->
+		<!-- <script src="js/jquery.js"></script> -->
+    <script src="{{ URL::asset('assets/full_baru/js/jquery.js') }}"></script>
 
-          <!-- Edit Dialog -->
-          <div class="modal fade" id="editNewEvent" aria-hidden="true" aria-labelledby="editNewEvent"
-            role="dialog" tabindex="-1" data-show="false">
-            <div class="modal-dialog modal-simple">
-              <form class="modal-content form-horizontal" action="#" method="post" role="form">
-                <div class="modal-header">
-                  <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
-                  <h4 class="modal-title">Edit Event</h4>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="editEname">Name:</label>
-                    <div class="col-md-10">
-                      <input type="text" class="form-control" id="editEname" name="editEname">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="editStarts">Starts:</label>
-                    <div class="col-md-10">
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="editStarts" name="editStarts" data-container="#editNewEvent"
-                          data-plugin="datepicker">
-                        <span class="input-group-addon">
-                          <i class="icon md-calendar" aria-hidden="true"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+		<!-- Bootstrap Core JavaScript -->
+    <script src="{{ URL::asset('assets/full_baru/js/bootstrap.min.js') }}"></script>
+		<!-- <script src="js/bootstrap.min.js"></script> -->
+		
+		<!-- FullCalendar -->
+		<!-- <script src='js/moment.min.js'></script> -->
+    <script src="{{ URL::asset('assets/full_baru/js/moment.min.js') }}"></script>
 
-                  <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="editEnds">Ends:</label>
-                    <div class="col-md-10">
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="editEnds" data-container="#editNewEvent"
-                          data-plugin="datepicker">
-                        <span class="input-group-addon">
-                          <i class="icon md-calendar" aria-hidden="true"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="editRepeats">Repeats:</label>
-                    <div class="col-md-10">
-                      <input type="text" class="form-control" id="editRepeats" name="repeats" data-plugin="TouchSpin"
-                        data-min="0" data-max="10" value="0" />
-                    </div>
-                  </div>
-                  <div class="form-group row" id="editColor">
-                    <label class="form-control-label col-md-2">Color:</label>
-                    <div class="col-md-10">
-                      <ul class="color-selector">
-                        <li class="bg-blue-600">
-                          <input type="radio" data-color="blue|600" name="colorChosen" id="editColorChosen2">
-                          <label for="editColorChosen2"></label>
-                        </li>
-                        <li class="bg-green-600">
-                          <input type="radio" data-color="green|600" name="colorChosen" id="editColorChosen3">
-                          <label for="editColorChosen3"></label>
-                        </li>
-                        <li class="bg-cyan-600">
-                          <input type="radio" data-color="cyan|600" name="colorChosen" id="editColorChosen4">
-                          <label for="editColorChosen4"></label>
-                        </li>
-                        <li class="bg-orange-600">
-                          <input type="radio" data-color="orange|600" name="colorChosen" id="editColorChosen5">
-                          <label for="editColorChosen4"></label>
-                        </li>
-                        <li class="bg-red-600">
-                          <input type="radio" data-color="red|600" name="colorChosen" id="editColorChosen6">
-                          <label for="editColorChosen6"></label>
-                        </li>
-                        <li class="bg-blue-grey-600">
-                          <input type="radio" data-color="blue-grey|600" name="colorChosen" id="editColorChosen7">
-                          <label for="editColorChosen7"></label>
-                        </li>
-                        <li class="bg-purple-600">
-                          <input type="radio" data-color="purple|600" name="colorChosen" id="editColorChosen8">
-                          <label for="editColorChosen8"></label>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="editPeople">People:</label>
-                    <div class="col-md-10">
-                      <select id="editPeople" multiple="multiple" class="plugin-selective"></select>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <div class="form-actions">
-                    <button class="btn btn-primary" data-dismiss="modal" type="button">Save</button>
-                    <button class="btn btn-danger" data-dismiss="modal" type="button">Delete</button>
-                    <a class="btn btn-sm btn-white btn-pure" data-dismiss="modal" href="javascript:void(0)">Cancel</a>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <!-- End EditEvent Dialog -->
+		<!-- <script src='js/fullcalendar.min.js'></script> -->
+    <script src="{{ URL::asset('assets/full_baru/js/fullcalendar.min.js') }}"></script>
 
-          <!--AddCalendar Dialog -->
-          <div class="modal fade" id="addNewCalendar" aria-hidden="true" aria-labelledby="addNewCalendar"
-            role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-simple">
-              <form class="modal-content form-horizontal" action="#" method="post" role="form">
-                <div class="modal-header">
-                  <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
-                  <h4 class="modal-title">New Calendar</h4>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="ename">Name:</label>
-                    <div class="col-md-10">
-                      <input type="text" class="form-control" id="ename" name="ename">
-                    </div>
-                  </div>
+		<?php $tanggal_sekarang = date("Y-m-d"); ?>
+	
+  	<script>
 
-                  <div class="form-group row">
-                    <label class="form-control-label col-md-2">Color:</label>
-                    <div class="col-md-10">
-                      <ul class="color-selector">
-                        <li class="bg-blue-600">
-                          <input type="radio" checked name="colorChosen" id="colorChosen2">
-                          <label for="colorChosen2"></label>
-                        </li>
-                        <li class="bg-green-600">
-                          <input type="radio" name="colorChosen" id="colorChosen3">
-                          <label for="colorChosen3"></label>
-                        </li>
-                        <li class="bg-cyan-600">
-                          <input type="radio" name="colorChosen" id="colorChosen4">
-                          <label for="colorChosen4"></label>
-                        </li>
-                        <li class="bg-orange-600">
-                          <input type="radio" name="colorChosen" id="colorChosen5">
-                          <label for="colorChosen5"></label>
-                        </li>
-                        <li class="bg-red-600">
-                          <input type="radio" name="colorChosen" id="colorChosen6">
-                          <label for="colorChosen6"></label>
-                        </li>
-                        <li class="bg-blue-grey-600">
-                          <input type="radio" name="colorChosen" id="colorChosen7">
-                          <label for="colorChosen7"></label>
-                        </li>
-                        <li class="bg-purple-600">
-                          <input type="radio" name="colorChosen" id="colorChosen8">
-                          <label for="colorChosen8"></label>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <label class="col-md-2 form-control-label" for="people">People:</label>
-                    <div class="col-md-10">
-                      <select id="people" multiple="multiple" class="plugin-selective"></select>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <div class="form-actions">
-                    <button class="btn btn-primary" data-dismiss="modal" type="button">Create</button>
-                    <a class="btn btn-sm btn-white btn-pure" data-dismiss="modal" href="javascript:void(0)">Cancel</a>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <!-- End AddCalendar Dialog -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Site Action -->
-    <div class="site-action" data-plugin="actionBtn">
-      <button type="button" class="site-action-toggle btn-raised btn btn-success btn-floating">
-        <i class="front-icon md-plus animation-scale-up" aria-hidden="true"></i>
-        <i class="back-icon md-delete animation-scale-up" aria-hidden="true"></i>
-      </button>
-    </div>
-    <!-- End Site Action -->
-
-    <!-- Add Calendar Form -->
-    <div class="modal fade" id="addNewCalendarForm" aria-hidden="true" aria-labelledby="addNewCalendarForm"
-      role="dialog" tabindex="-1">
-      <div class="modal-dialog modal-simple">
-        <form class="modal-content" action="#" method="post" role="form">
-          <div class="modal-header">
-            <button type="button" class="close" aria-hidden="true" data-dismiss="modal">×</button>
-            <h4 class="modal-title">Create New Calendar</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label class="form-control-label mb-15" for="name">Calendar name:</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="Calendar name">
-            </div>
-            <div class="form-group">
-              <label class="form-control-label mb-15" for="name">Choice people to your project:</label>
-              <select multiple="multiple" class="plugin-selective"></select>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <div class="form-actions">
-              <button class="btn btn-primary" data-dismiss="modal" type="button">Create</button>
-              <a class="btn btn-sm btn-white btn-pure" data-dismiss="modal" href="javascript:void(0)">Cancel</a>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!-- End Add Calendar Form -->
-<body>
-
+		$(document).ready(function() {
+			
+			$('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,basicWeek,basicDay'
+				},
+		defaultDate: '<?php echo $tanggal_sekarang; ?>',
+		editable: false,
+		eventLimit: true, // allow "more" link when too many events
+		selectable: true,
+		selectHelper: true,
+		select: function(start, end) {
+		
+		$('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+		$('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+		$('#ModalAdd').modal('show');
+		},
+		eventRender: function(event, element) {
+		element.bind('dblclick', function() {
+		$('#ModalEdit #id').val(event.id);
+		$('#ModalEdit #title').val(event.title);
+		$('#ModalEdit #color').val(event.color);
+		$('#ModalEdit').modal('show');
+		});
+		},
+		eventDrop: function(event, delta, revertFunc) { // si changement de position
+		edit(event);
+		},
+		eventResize: function(event,dayDelta,minuteDelta,revertFunc) { // si changement de longueur
+		edit(event);
+		},
+		events: [
+			@foreach($jadwal_pasien as $jadwal)
+			
+			{
+				id: "{{ $jadwal->id }}",
+				title: "{{ $jadwal->nama_jadwal }}",
+				start: "{{ $jadwal->start }}",
+				end: "{{ $jadwal->end }}",
+				color: "{{ $jadwal->color }}",
+			},
+			@endforeach
+		]
+		});
+		
+		function edit(event){
+		start = event.start.format('YYYY-MM-DD HH:mm:ss');
+		if(event.end){
+		end = event.end.format('YYYY-MM-DD HH:mm:ss');
+		}else{
+		end = start;
+		}
+		
+		id =  event.id;
+		
+		Event = [];
+		Event[0] = id;
+		Event[1] = start;
+		Event[2] = end;
+		
+		$.ajax({
+		url: 'editEventDate.php',
+		type: "POST",
+		data: {Event:Event},
+		success: function(rep) {
+		if(rep == 'OK'){
+		alert('Saved');
+		}else{
+		alert('Could not be saved. try again.');
+		}
+		}
+		});
+		}
+		
+		});
+		</script>
+	</body>
 @endsection
 
 @section('bottom_add_assets')
-    <!-- Core  -->
-    <script src="{{ URL::asset('assets/global/vendor/babel-external-helpers/babel-external-helpers.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/jquery/jquery.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/popper-js/umd/popper.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/bootstrap/bootstrap.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/animsition/animsition.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/mousewheel/jquery.mousewheel.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/asscrollbar/jquery-asScrollbar.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/asscrollable/jquery-asScrollable.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/waves/waves.js') }}"></script>
-    
-    <!-- Plugins -->
-    <script src="{{ URL::asset('assets/global/vendor/switchery/switchery.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/intro-js/intro.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/screenfull/screenfull.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/slidepanel/jquery-slidePanel.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/moment/moment.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/fullcalendar/fullcalendar.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/jquery-selective/jquery-selective.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/bootstrap-touchspin/bootstrap-touchspin.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/vendor/bootbox/bootbox.js') }}"></script>
-    
-    <!-- Scripts -->
-    <script src="{{ URL::asset('assets/global/js/Component.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Plugin.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Base.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Config.js') }}"></script>
-    
-    <script src="{{ URL::asset('assets/local/js/Section/Menubar.js') }}"></script>
-    <script src="{{ URL::asset('assets/local/js/Section/Sidebar.js') }}"></script>
-    <script src="{{ URL::asset('assets/local/js/Section/PageAside.js') }}"></script>
-    <script src="{{ URL::asset('assets/local/js/Plugin/menu.js') }}"></script>
-    
-    <!-- Config -->
-    <script src="{{ URL::asset('assets/global/js/config/colors.js') }}"></script>
-    <script src="{{ URL::asset('assets/local/js/config/tour.js') }}"></script>
-    <script>Config.set('assets', './assets');</script>
-    
-    <!-- Page -->
-    <script src="{{ URL::asset('assets/local/js/Site.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Plugin/asscrollable.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Plugin/slidepanel.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Plugin/switchery.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Plugin/bootstrap-touchspin.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Plugin/bootstrap-datepicker.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Plugin/material.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Plugin/action-btn.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Plugin/editlist.js') }}"></script>
-    <script src="{{ URL::asset('assets/global/js/Plugin/bootbox.js') }}"></script>
-    <script src="{{ URL::asset('assets/local/js/Site.js') }}"></script>
-    <script src="{{ URL::asset('assets/local/js/App/Calendar.js') }}"></script>
-    <script src="{{ URL::asset('assets/local/examples/js/apps/calendar.js') }}"></script>
+
+		<!-- /.container -->
+		<!-- jQuery Version 1.11.1 -->
+		<!-- <script src="js/jquery.js"></script> -->
+    <script src="{{ URL::asset('assets/full_baru/js/jquery.js') }}"></script>
+
+		<!-- Bootstrap Core JavaScript -->
+    <script src="{{ URL::asset('assets/full_baru/js/bootstrap.min.js') }}"></script>
+		<!-- <script src="js/bootstrap.min.js"></script> -->
+		
+		<!-- FullCalendar -->
+		<!-- <script src='js/moment.min.js'></script> -->
+    <script src="{{ URL::asset('assets/full_baru/js/moment.min.js') }}"></script>
+
+		<!-- <script src='js/fullcalendar.min.js'></script> -->
+    <script src="{{ URL::asset('assets/full_baru/js/fullcalendar.min.js') }}"></script>
+
+		<?php $tanggal_sekarang = date("Y-m-d"); ?>
+	
+  	<script>
+
+		$(document).ready(function() {
+			
+			$('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,basicWeek,basicDay'
+				},
+		defaultDate: '<?php echo $tanggal_sekarang; ?>',
+		editable: true,
+		eventLimit: true, // allow "more" link when too many events
+		selectable: true,
+		selectHelper: true,
+		select: function(start, end) {
+		
+		$('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+		$('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+		$('#ModalAdd').modal('show');
+		},
+		eventRender: function(event, element) {
+		element.bind('dblclick', function() {
+		$('#ModalEdit #id').val(event.id);
+		$('#ModalEdit #title').val(event.title);
+		$('#ModalEdit #color').val(event.color);
+		$('#ModalEdit').modal('show');
+		});
+		},
+		eventDrop: function(event, delta, revertFunc) { // si changement de position
+		edit(event);
+		},
+		eventResize: function(event,dayDelta,minuteDelta,revertFunc) { // si changement de longueur
+		edit(event);
+		},
+		events: [
+			{
+				title: 'Long Event',
+				start: '2019-07-07',
+				end: '2019-07-10'
+			},
+			{
+				title: 'Conference',
+				start: '2019-07-11',
+				end: '2019-07-13'
+			},
+  		]
+		});
+		
+		function edit(event){
+		start = event.start.format('YYYY-MM-DD HH:mm:ss');
+		if(event.end){
+		end = event.end.format('YYYY-MM-DD HH:mm:ss');
+		}else{
+		end = start;
+		}
+		
+		id =  event.id;
+		
+		Event = [];
+		Event[0] = id;
+		Event[1] = start;
+		Event[2] = end;
+		
+		$.ajax({
+		url: 'editEventDate.php',
+		type: "POST",
+		data: {Event:Event},
+		success: function(rep) {
+		if(rep == 'OK'){
+		alert('Saved');
+		}else{
+		alert('Could not be saved. try again.');
+		}
+		}
+		});
+		}
+		
+		});
+		</script>
+
 @endsection
